@@ -1,4 +1,7 @@
 package com.appvendas.service;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,7 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	@Autowired
 	private VendasDaoInterface dao;
 	
+
 	
 	@Override
 	public void salvar(Vendas vendas) {
@@ -41,12 +45,34 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	public Optional<Vendas> buscarPorVenda(Long id) {
 		return dao.findById(id);
 	}
+	
+	@Override
+	public List<Vendas> pesquisarPorDescricao(String descricao){
+		return dao.findByDescricaoContaining(descricao);
+	}
+	
 
 	@Override
 	public double informarTotalVendasMensal(int mes, int ano) {
 		
-		return 0;
-	}
+		Calendar calendario = Calendar.getInstance();	
+		
+		List<Vendas> listaVendas = (List<Vendas>) dao.findAll();
+		
+		double soma = 0.0;
+		
+		for(Vendas v: listaVendas) {
+			calendario.setTime(v.getData());
+			int mesVenda = 1 + calendario.get(Calendar.MONTH);
+			int anoVenda = calendario.get(Calendar.YEAR);
+			if(mes == mesVenda && ano == anoVenda) {
+				soma += v.getValor();
+			}
+		}	
+		return soma;
+		}
+	
+
 
 	@Override
 	public double informarTotalVendasAnual(int ano) {

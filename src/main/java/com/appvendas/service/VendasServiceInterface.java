@@ -19,6 +19,8 @@ public interface VendasServiceInterface {
 	
 	Optional<Vendas> buscarPorVenda(Long id);
 	
+	List<Vendas> pesquisarPorDescricao(String descricao);
+	
 	//implementações específicas
 	
 	double informarTotalVendasMensal(int mes, int ano);

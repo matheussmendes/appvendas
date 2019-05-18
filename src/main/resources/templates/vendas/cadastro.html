@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="layout">
+
+<section layout:fragment="conteudo">
+
+	<div class="container">
+		<div class="section">
+			<div>
+				<form class="col s12" method="POST" th:action="@{/salvar}"
+					th:object="${vendas}">
+
+					<div class="input-field col s6">
+						<i class="material-icons prefix">attach_money</i> <input
+							th:field="*{valor}" id="valor" type="text" class="validate" /> <label
+							for="valor">Valor</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">mode_edit</i> <input
+							th:field="*{descricao}" id="descricao" type="password"
+							class="validate" /> <label for="descricao">Descricao</label>
+					</div>
+
+					<div class="input-field col s6">
+						<i class="material-icons prefix">date_range</i> <input id="data"
+							type="date" th:field="*{data}"> <label for="data">Data
+							da Venda</label>
+					</div>
+
+					<div align="center">
+
+						<button class="btn waves-effect waves-light" type="submit"
+							name="action">
+							Registrar<i class="material-icons right">send</i>
+						</button>
+					</div>
+
+				</form>
+			</div>
+
+
+		</div>
+
+	</div>
+</section>
+
+</html>
