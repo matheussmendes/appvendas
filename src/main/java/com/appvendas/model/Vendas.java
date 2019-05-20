@@ -1,10 +1,8 @@
 package com.appvendas.model;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -20,6 +18,7 @@ public class Vendas extends AbstractEntity<Long>{
 	private String descricao;
 	
 	@Column(columnDefinition = "Date", name = "data")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 
 	

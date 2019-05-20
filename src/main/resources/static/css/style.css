@@ -17,7 +17,17 @@
 	width: 30px;
 	height: 30px;
 }
+.estiloIconesDaTabela{
+	width: 15px;
+	height: 15px;
+}
 
 .divRodape{
 	background-color: blue;
+}
+
+.estiloPesquisa{
+	margin-top: 5px;
+	margin-bottom: 10px;
+	background-color: white;
 }

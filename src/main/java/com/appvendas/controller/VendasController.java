@@ -1,15 +1,14 @@
 package com.appvendas.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.appvendas.model.Vendas;
 import com.appvendas.service.VendasServiceImpl;
@@ -32,13 +31,14 @@ public class VendasController {
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
-	public String salvar(Vendas vendas) {
+	public String salvar(Vendas vendas, RedirectAttributes ra) {
 		service.salvar(vendas);
+		ra.addFlashAttribute("sucesso", "Venda registrada com sucesso!!");
 		return "redirect:/formulario";
 	}
 
 	@GetMapping("/buscar")
-	public String pesquisarPorDescricao(@RequestParam("descricao") String descricao, ModelMap model) {
+	public String pesquisarPorDescricao(@RequestParam("descricao")String descricao, ModelMap model) {
 		model.addAttribute("vendas", service.pesquisarPorDescricao(descricao));
 		return "/vendas/lista";
 	}
@@ -47,5 +47,11 @@ public class VendasController {
 	@RequestMapping("/painel")
 	public String exibirPainel(Vendas vendas) {
 		return "/vendas/painel";
+	}
+	
+	@RequestMapping("/{id}")
+	public String editar(@PathVariable("id")Vendas vendas, ModelMap model) {
+		model.addAttribute(vendas);
+		return "/vendas/cadastro";
 	}
 }
