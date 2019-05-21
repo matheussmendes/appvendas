@@ -756,11 +756,11 @@
 }
 
 .light-blue {
-  background-color: #03a9f4 !important;
+  background-color: #ffffff !important;
 }
 
 .light-blue-text {
-  color: #03a9f4 !important;
+  color: #ffffff !important;
 }
 
 .light-blue.lighten-5 {
@@ -796,7 +796,7 @@
 }
 
 .light-blue.lighten-1 {
-  background-color: #29b6f6 !important;
+  background-color: #ffffff!important;
 }
 
 .light-blue-text.text-lighten-1 {
@@ -4290,7 +4290,7 @@ nav.nav-extended .nav-content {
 }
 
 nav a {
-  color: #fff;
+  color: #0080ff;
 }
 
 nav i,
@@ -4328,7 +4328,7 @@ nav .sidenav-trigger i {
 
 nav .brand-logo {
   position: absolute;
-  color: #fff;
+  color: #0080ff;
   display: inline-block;
   font-size: 2.1rem;
   padding: 0;

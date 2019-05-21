@@ -2,10 +2,12 @@ package com.appvendas.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-
+import com.appvendas.model.enums.StatusDoPagamento;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,7 +23,9 @@ public class Vendas extends AbstractEntity<Long>{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 
-	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private StatusDoPagamento status;
 	
 	public Double getValor() {
 		return valor;
@@ -46,6 +50,15 @@ public class Vendas extends AbstractEntity<Long>{
 	public void setData(Date data) {
 		this.data = data;
 	}
+
+	public StatusDoPagamento getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusDoPagamento status) {
+		this.status = status;
+	}
+	
 	
 	
 }

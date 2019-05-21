@@ -11,9 +11,10 @@
 		<div class="nav-wrapper">
 			<form th:action="@{/buscar}" class="estiloPesquisa">
 				<div class="input-field">
-					<input id="search" type="search" name="descricao" placeholder="Qual a venda que você procura? Digite e pressione 'enter'"> <label
-						class="label-icon" for="search"><i class="material-icons">search</i></label>
-					<i class="material-icons">close</i>
+					<input id="search" type="search" name="descricao"
+						placeholder="Qual a venda que você procura? Digite e pressione 'enter'">
+					<label class="label-icon" for="search"><i
+						class="material-icons">search</i></label> <i class="material-icons">close</i>
 				</div>
 			</form>
 		</div>
@@ -41,14 +42,24 @@
 				<td th:text="${v.valor}"></td>
 				<td th:text="${v.descricao}"></td>
 				<td th:text="${v.data}"></td>
-				
-				<td><a th:href="@{{id}(id=${v.id})}" title="Editar"><img
-						src="/imagens/editar.png" class="estiloIconesDaTabela" />
-						
-						</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-					href="#" title="Excluir"><img src="/imagens/excluir.png"
-						class="estiloIconesDaTabela" /></a></td>
 
+				<td><a th:href="@{{id}(id=${v.id})}" title="Editar"><img
+						src="/imagens/editar.png" class="estiloIconesDaTabela" /></a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- Modal Structure -->
+					<div id="modal1" class="modal">
+						<div class="modal-content">
+							<h4>ATENÇÃO</h4>
+							<p>
+								Você tem certeza de que deseja excluir esse registro?
+							</p>
+						</div>
+						<div class="modal-footer">
+							<a th:href="@{/excluir/{id}(id=${v.id})}"
+								class="modal-close waves-effect waves-green btn-flat">Sim</a> <a
+								href="#!" class="modal-close waves-effect waves-green btn-flat">Não</a>
+						</div>
+					</div> <a class="waves-effect waves-light btn modal-trigger"
+					href="#modal1">Excluir</a></td>
 			</tr>
 		</tbody>
 	</table>
