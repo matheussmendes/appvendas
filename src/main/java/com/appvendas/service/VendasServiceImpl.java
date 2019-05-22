@@ -18,7 +18,6 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	@Autowired
 	private VendasDaoInterface dao;
 	
-
 	
 	@Override
 	public void salvar(Vendas vendas) {
@@ -53,23 +52,9 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	
 
 	@Override
-	public double informarTotalVendasMensal(int mes, int ano) {
+	public double informarTotalVendasMensal() {
 		
-		Calendar calendario = Calendar.getInstance();	
-		
-		List<Vendas> listaVendas = (List<Vendas>) dao.findAll();
-		
-		double soma = 0.0;
-		
-		for(Vendas v: listaVendas) {
-			calendario.setTime(v.getData());
-			int mesVenda = 1 + calendario.get(Calendar.MONTH);
-			int anoVenda = calendario.get(Calendar.YEAR);
-			if(mes == mesVenda && ano == anoVenda) {
-				soma += v.getValor();
-			}
-		}	
-		return soma;
+		return (Double) null;
 		}
 	
 
@@ -84,6 +69,11 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	public double informarTotalVendasDiaria(int dia, int mes, int ano) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Vendas> pesquisarVendasPorData(Date dataInicial, Date dataFinal) {
+		return dao.findByDataBetween(dataInicial, dataFinal);
 	}
 
 }

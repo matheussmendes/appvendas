@@ -1,5 +1,6 @@
 package com.appvendas.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +22,11 @@ public interface VendasServiceInterface {
 	
 	List<Vendas> pesquisarPorDescricao(String descricao);
 	
+	List<Vendas> pesquisarVendasPorData(Date dataInicial, Date dataFinal);
+	
 	//implementações específicas
 	
-	double informarTotalVendasMensal(int mes, int ano);
+	double informarTotalVendasMensal();
 	
 	double informarTotalVendasAnual(int ano);
 	

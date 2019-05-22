@@ -9,7 +9,6 @@
 		<div class="section">
 			<div>
 
-				<div layout:insert="/alert"></div>
 
 				<form class="col s12" method="POST" th:action="@{/salvar}"
 					th:object="${vendas}">
@@ -20,6 +19,9 @@
 						<i class="material-icons prefix">attach_money</i> <input
 							th:field="*{valor}" id="valor" type="text" class="validate" /> <label
 							for="valor">Valor</label>
+							<div class="invalid-feedback">
+								<span th:errors="*{valor}"></span>
+							</div>
 					</div>
 					<div class="input-field col s6">
 						<i class="material-icons prefix">mode_edit</i> <input
@@ -36,7 +38,7 @@
 					<div class="input-field col s12">
 						<select id="status" th:field="*{status}">
 							<option value="">Selecione</option>
-							<option th:each="s : ${listaDestatus}" th:value="${status}" th:text="${s.descricao}">Option 1</option>
+							<option th:each="s : ${listaDestatus}" th:value="${s}" th:text="${s.descricao}">Option 1</option>
 						</select> 
 					</div>
 

@@ -15,12 +15,12 @@
 	media="screen,projection" />
 <link href="css/style.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
 </head>
 <body>
 
-	<header layout:insert="cabecalho"></header>
+	<header layout:insert="/fragmentos/cabecalho"></header>
 
 	<section layout:fragment="pesquisa"></section>
 
@@ -30,9 +30,23 @@
 	<!-- 	<footer layout:insert="rodape"></footer> -->
 
 	<!--  Scripts-->
+
+	<script th:if="${mensagemDeSucesso} != null">
+	
+	Swal.fire({
+		  position: 'top-end',
+		  type: 'success',
+		  title: 'Operação realizada com sucesso!!!',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+	
+	</script> 
+	
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>
+	
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var elems = document.querySelectorAll('.modal');

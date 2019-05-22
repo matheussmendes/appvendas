@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,9 +15,11 @@ import com.appvendas.model.enums.StatusDoPagamento;
 public class Vendas extends AbstractEntity<Long>{
 
 	@Column(columnDefinition = "DECIMAL(7,2) DEFAULT 0.00", nullable = false)
+	@NotNull(message = "Campo obrigatório! Favor preencher")
 	private Double valor;
 	
 	@Column(nullable = false)
+	@NotNull(message = "Campo obrigatório! Favor preencher")
 	private String descricao;
 	
 	@Column(columnDefinition = "Date", name = "data")
@@ -25,7 +28,7 @@ public class Vendas extends AbstractEntity<Long>{
 
 	@Column
 	@Enumerated(EnumType.STRING)
-	private StatusDoPagamento status;
+	private StatusDoPagamento statusPagamento;
 	
 	public Double getValor() {
 		return valor;
@@ -52,11 +55,11 @@ public class Vendas extends AbstractEntity<Long>{
 	}
 
 	public StatusDoPagamento getStatus() {
-		return status;
+		return statusPagamento;
 	}
 
 	public void setStatus(StatusDoPagamento status) {
-		this.status = status;
+		this.statusPagamento = status;
 	}
 	
 	
