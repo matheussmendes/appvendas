@@ -1,16 +1,12 @@
 package com.appvendas.controller;
 
-import java.util.Date;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,18 +27,19 @@ public class VendasController {
 
 	@RequestMapping(path = "/lista")
 	public String listar(ModelMap model) {
-		model.addAttribute("listaDevendas", service.listarTodasAsVendas());
+		model.addAttribute("vendas", service.listarTodasAsVendas());
 		return "/vendas/lista";
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvar(@Valid Vendas vendas, RedirectAttributes ra, BindingResult result) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "/vendas/cadastro";
-		}else {
-		service.salvar(vendas);
-		ra.addFlashAttribute("mensagemDeSucesso", "Venda registrada com sucesso!!");
-		return "redirect:/formulario";}
+		} else {
+			service.salvar(vendas);
+			ra.addFlashAttribute("mensagemDeSucesso", "Venda registrada com sucesso!!");
+			return "redirect:/formulario";
+		}
 	}
 
 	@RequestMapping("/buscar")
@@ -61,37 +58,27 @@ public class VendasController {
 		model.addAttribute(vendas);
 		return "/vendas/cadastro";
 	}
-	
+
 	@RequestMapping("/deletar/{id}")
-	public String excluir(@PathVariable("id")Vendas vendas, RedirectAttributes ra) {
+	public String excluir(@PathVariable("id") Vendas vendas, RedirectAttributes ra) {
 		service.excluir(vendas);
 		ra.addFlashAttribute("mensagemDeSucesso", "");
 		return "redirect:/lista";
 	}
+
+	@ModelAttribute("somaDasVendasDiaria")
+	public Double retornarTotalDeVendasDiaria() {
+		return service.retornarVendaDiaria();
+	}
 	
-	/*
-	 * @ModelAttribute("somaDasVendasDoMes") public Double
-	 * informarTotalDeVendasDoMes() { System.out.println("resultad" +
-	 * service.informarTotalVendasMensal()); return
-	 * service.informarTotalVendasMensal();
-	 * 
-	 * }
-	 */
+	@ModelAttribute("somaDasVendasDoMes")
+	public Double retornarTotalDeVendasDoMes() {
+		return service.retornarVendaMensal();
+	}
 	
-	
-	
-	
-	
-	/*
-	 * @ModelAttribute("listaDestatus") public StatusDoPagamento[] listaDeStatus() {
-	 * return StatusDoPagamento.values(); }
-	 * 
-	 * @RequestMapping("/pesquisarVendasPorDatas") public String
-	 * pesquisarVendasPorData(@RequestParam("datas")ModelMap model, Date
-	 * dataInicial, Date dataFinal) {
-	 * model.addAttribute("vendasEncontradasPelasDatas",
-	 * service.pesquisarVendasPorData(dataInicial, dataFinal)); return
-	 * "/vendas/lista"; }
-	 */
-	
+	@ModelAttribute("somaDasVendasDoAno")
+	public Double retornarTotalDeVendasAnual() {
+		return service.retornarVendaAnual();
+	}
+
 }

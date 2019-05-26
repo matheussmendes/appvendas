@@ -1,13 +1,9 @@
 package com.appvendas.service;
-import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.appvendas.dao.VendasDaoInterface;
 import com.appvendas.model.Vendas;
 
@@ -17,6 +13,15 @@ public class VendasServiceImpl implements VendasServiceInterface{
 
 	@Autowired
 	private VendasDaoInterface dao;
+	
+	
+	public static Calendar CALENDARIO = Calendar.getInstance();
+	public static Calendar CALENDARIO_DA_VENDA = Calendar.getInstance();
+	
+	public static int MES_ATUAL = 1 + CALENDARIO.get(Calendar.MONTH);
+	public static int ANO_ATUAL = CALENDARIO.get(Calendar.YEAR);
+	public static int DIA_DE_HOJE = CALENDARIO.get(Calendar.DAY_OF_MONTH);
+	
 	
 	
 	@Override
@@ -49,31 +54,77 @@ public class VendasServiceImpl implements VendasServiceInterface{
 	public List<Vendas> pesquisarPorDescricao(String descricao){
 		return dao.findByDescricaoContaining(descricao);
 	}
-	
+
 
 	@Override
-	public double informarTotalVendasMensal() {
+	public double valorTotalDasVendas() {
 		
-		return (Double) null;
+		double soma = 0.0;
+		
+		for(Vendas v : dao.findAll()) {
+			soma += v.getValor();
 		}
+		return soma;
+	}
+
+	@Override
+	public double retornarVendaMensal() {
+		
+		double soma = 0.0;
+		
+		for(Vendas v : dao.findAll()) {
+
+			CALENDARIO_DA_VENDA.setTime(v.getData());
+			
+			int mesVenda =  1 + CALENDARIO_DA_VENDA.get(Calendar.MONTH);	
+			int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
+		
+			if(MES_ATUAL == mesVenda && anoVenda == ANO_ATUAL) {
+				soma += v.getValor();
+			}
+		}
+			return soma;
+	}
+
+	@Override
+	public double retornarVendaAnual() {
+		
+		double soma = 0.0;
+		
+		for(Vendas v : dao.findAll()) {
+			
+			CALENDARIO_DA_VENDA.setTime(v.getData());
+			
+			int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
+			
+			if(anoVenda == ANO_ATUAL) {
+				soma += v.getValor();
+			}
+		}
+			
+		return soma;
+	}
+
+	@Override
+	public double retornarVendaDiaria() {
+		
+		double soma = 0.0;
+		
+		for(Vendas v : dao.findAll()) {
+		
+			CALENDARIO_DA_VENDA.setTime(v.getData());
+			
+			int diaVenda = 1 + CALENDARIO_DA_VENDA.get(Calendar.DAY_OF_MONTH);
+			int mesVenda = 1 + CALENDARIO_DA_VENDA.get(Calendar.MONTH);
+			int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
+			
+			if(diaVenda == DIA_DE_HOJE && mesVenda == MES_ATUAL && anoVenda == ANO_ATUAL) {
+				soma += v.getValor();
+			}
+		}
+		return soma;
+	}
 	
-
-
-	@Override
-	public double informarTotalVendasAnual(int ano) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double informarTotalVendasDiaria(int dia, int mes, int ano) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Vendas> pesquisarVendasPorData(Date dataInicial, Date dataFinal) {
-		return dao.findByDataBetween(dataInicial, dataFinal);
-	}
-
+	
+	
 }

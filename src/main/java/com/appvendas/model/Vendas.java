@@ -1,4 +1,6 @@
 package com.appvendas.model;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +16,8 @@ import com.appvendas.model.enums.StatusDoPagamento;
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column(columnDefinition = "DECIMAL(7,2) DEFAULT 0.00", nullable = false)
-	@NotNull(message = "Campo obrigatório! Favor preencher")
-	private Double valor;
+	@Column
+	private double valor;
 	
 	@Column(nullable = false)
 	@NotNull(message = "Campo obrigatório! Favor preencher")
@@ -26,17 +27,10 @@ public class Vendas extends AbstractEntity<Long>{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 
-	@Column
 	@Enumerated(EnumType.STRING)
 	private StatusDoPagamento statusPagamento;
 	
-	public Double getValor() {
-		return valor;
-	}
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
 
 	public String getDescricao() {
 		return descricao;
@@ -54,14 +48,21 @@ public class Vendas extends AbstractEntity<Long>{
 		this.data = data;
 	}
 
-	public StatusDoPagamento getStatus() {
+	public StatusDoPagamento getStatusPagamento() {
 		return statusPagamento;
 	}
 
-	public void setStatus(StatusDoPagamento status) {
-		this.statusPagamento = status;
+	public void setStatusPagamento(StatusDoPagamento statusPagamento) {
+		this.statusPagamento = statusPagamento;
 	}
-	
-	
-	
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+
 }

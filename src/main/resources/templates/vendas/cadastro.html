@@ -17,29 +17,23 @@
 
 					<div class="input-field col s6">
 						<i class="material-icons prefix">attach_money</i> <input
-							th:field="*{valor}" id="valor" type="text" class="validate" /> <label
-							for="valor">Valor</label>
-							<div class="invalid-feedback">
-								<span th:errors="*{valor}"></span>
-							</div>
+							required="required" th:field="*{valor}" type="text"
+							class="validate" /> <label for="money">Valor</label><span
+							class="helper-text" data-error="campo obrigatório"
+							data-success=""></span>
 					</div>
 					<div class="input-field col s6">
 						<i class="material-icons prefix">mode_edit</i> <input
-							th:field="*{descricao}" id="descricao" type="text"
-							class="validate" /> <label for="descricao">Descricao</label>
+							required="required" th:field="*{descricao}" id="descricao"
+							type="text" class="validate" /> <label for="descricao">Descricao</label><span
+							class="helper-text" data-error="campo obrigatório"
+							data-success=""></span>
 					</div>
 
 					<div class="input-field col s6">
 						<i class="material-icons prefix">date_range</i> <input type="text"
-							class="datepicker" id='datepicker.regional' th:field=*{data}>
-						<label for="data">Data da Venda</label>
-					</div>
-
-					<div class="input-field col s12">
-						<select id="status" th:field="*{status}">
-							<option value="">Selecione</option>
-							<option th:each="s : ${listaDestatus}" th:value="${s}" th:text="${s.descricao}">Option 1</option>
-						</select> 
+							class="datepicker" id='data' th:field=*{data}> <label
+							for="data">Data da Venda</label>
 					</div>
 
 

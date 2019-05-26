@@ -37,7 +37,7 @@
 		</thead>
 
 		<tbody>
-			<tr th:each="v : ${listaDevendas}">
+			<tr th:each="v : ${vendas}">
 				<td th:text="${v.id}"></td>
 				<td th:text="${v.valor}"></td>
 				<td th:text="${v.descricao}"></td>
@@ -47,32 +47,14 @@
 						src="/imagens/editar.png" class="estiloIconesDaTabela" /></a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 					
-					<a class="waves-effect waves-light btn modal-trigger"
-						href="#modal1">Excluir</a>
-					
-				 	<div id="modal1" class="modal">
-						
-						<div class="modal-content">
-							<h4>ATENÇÃO</h4>
-							<p>Você tem certeza de que deseja excluir esse registro?</p>
-						</div>
-						
-						<div class="modal-footer">
-							
-							<a th:href="@{deletar/{id}(id=${v.id})}"
-								class="modal-close waves-effect waves-green btn-flat">Sim</a> 
-								
-								<a href="#!" class="modal-close waves-effect waves-green btn-flat">Não</a>
-						</div>
-						
-					</div> 
-						
-				</td> 
-								
+					<a
+					th:href="@{/deletar/{id}(id=${v.id})}" title="Excluir"><img
+						src="/imagens/excluir.png" class="estiloIconesDaTabela" /> </a></td>
+
 			</tr>
 		</tbody>
 	</table>
-	
+
 </section>
 
 </html>
