@@ -4,57 +4,66 @@
 	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="layout">
 
 
-
 <section layout:fragment="pesquisa">
 
-	<nav>
-		<div class="nav-wrapper">
-			<form th:action="@{/buscar}" class="estiloPesquisa">
-				<div class="input-field">
-					<input id="search" type="search" name="descricao"
-						placeholder="Qual a venda que você procura? Digite e pressione 'enter'">
-					<label class="label-icon" for="search"><i
-						class="material-icons">search</i></label> <i class="material-icons">close</i>
+	<div class="w3-container">
+		<div class="row">
+			<form class="col s12" th:action="@{/buscarPorDatas}">
+				<div class="row">
+					<div class="input-field col s6">
+						<i class="material-icons prefix">date_range</i> <input
+							id="icon_prefix" type="date" th:name="dataInicio"> <label
+							for="icon_prefix">Data início</label>
+					</div>
+					<div class="input-field col s6">
+						<i class="material-icons prefix">date_range</i> <input
+							id="icon_telephone" type="date" class="validate" th:name="dataFim"> <label
+							for="icon_telephone">Data fim</label>
+					</div>
+					<div style="text-align: center">
+						<button class="btn waves-effect waves-light" type="submit">
+							Pesquisar<i class="material-icons right">search</i>
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>
-	</nav>
+	</div>
+
 
 </section>
 
 <section layout:fragment="conteudo">
+	<div class="w3-container">
+		<table class="centered">
+			<thead>
+				<tr>
+					<th>Código</th>
+					<th>Valor</th>
+					<th>Descrição</th>
+					<th>Data</th>
+					<th>Ações</th>
 
-	<table class="centered">
-		<thead>
-			<tr>
-				<th>Código</th>
-				<th>Valor</th>
-				<th>Descrição</th>
-				<th>Data</th>
-				<th>Ações</th>
+				</tr>
+			</thead>
 
-			</tr>
-		</thead>
+			<tbody>
+				<tr th:each="v : ${vendas}">
+					<td th:text="${v.id}"></td>
+					<td th:text="${v.valor}"></td>
+					<td th:text="${v.descricao}"></td>
+					<td th:text="${v.data}"></td>
 
-		<tbody>
-			<tr th:each="v : ${vendas}">
-				<td th:text="${v.id}"></td>
-				<td th:text="${v.valor}"></td>
-				<td th:text="${v.descricao}"></td>
-				<td th:text="${v.data}"></td>
+					<td><a th:href="@{{id}(id=${v.id})}" title="Editar"><img
+							src="/imagens/editar.png" class="estiloIconesDaTabela" /></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+						th:href="@{/deletar/{id}(id=${v.id})}" title="Excluir"><img
+							src="/imagens/excluir.png" class="estiloIconesDaTabela" /> </a></td>
 
-				<td><a th:href="@{{id}(id=${v.id})}" title="Editar"><img
-						src="/imagens/editar.png" class="estiloIconesDaTabela" /></a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					
-					<a
-					th:href="@{/deletar/{id}(id=${v.id})}" title="Excluir"><img
-						src="/imagens/excluir.png" class="estiloIconesDaTabela" /> </a></td>
-
-			</tr>
-		</tbody>
-	</table>
-
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </section>
 
 </html>

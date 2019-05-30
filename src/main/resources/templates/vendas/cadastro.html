@@ -9,7 +9,6 @@
 		<div class="section">
 			<div>
 
-
 				<form class="col s12" method="POST" th:action="@{/salvar}"
 					th:object="${vendas}">
 
@@ -17,26 +16,25 @@
 
 					<div class="input-field col s6">
 						<i class="material-icons prefix">attach_money</i> <input
-							required="required" th:field="*{valor}" type="text"
-							class="validate" /> <label for="money">Valor</label><span
-							class="helper-text" data-error="campo obrigatório"
-							data-success=""></span>
+							required="required" th:field="*{valor}" type="text" id="currency" 
+							class="validate" /> <label for="money">Entre com o
+							valor de sua venda ou serviço prestado:</label><span class="helper-text"
+							data-error="campo obrigatório" data-success=""></span>
 					</div>
 					<div class="input-field col s6">
 						<i class="material-icons prefix">mode_edit</i> <input
 							required="required" th:field="*{descricao}" id="descricao"
-							type="text" class="validate" /> <label for="descricao">Descricao</label><span
-							class="helper-text" data-error="campo obrigatório"
-							data-success=""></span>
+							type="text" class="validate" /> <label for="descricao">Descrição
+							da venda ou serviço</label><span class="helper-text"
+							data-error="campo obrigatório" data-success=""></span>
 					</div>
 
-					<div class="input-field col s6">
-						<i class="material-icons prefix">date_range</i> <input type="text"
-							class="datepicker" id='data' th:field=*{data}> <label
-							for="data">Data da Venda</label>
-					</div>
-
-
+					<div class="input-field col s6" th:if="*{data != null}">
+						<i class="material-icons prefix">date_range</i> <input
+							th:field=*{data}> 
+					</div> 
+					
+				
 					<div align="center">
 
 						<button class="btn waves-effect waves-light" type="submit"

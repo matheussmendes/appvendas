@@ -18,7 +18,5 @@ public enum StatusDoPagamento {
 		this.descricao = descricao;
 	}
 	
-	
-	
-	
+
 }

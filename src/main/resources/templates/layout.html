@@ -2,34 +2,66 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	
+
 <title>byMendes - Registre suas vendas conosco</title>
 
 <!-- CSS  -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+
 <link href="css/materialize.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
+
 <link href="css/style.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+<script src="js/mascarasFormulario.js"></script>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script>
+    $(document).ready(function(){
+    $("#money").inputmask('decimal', {
+                'alias': 'numeric',
+                'groupSeparator': ',',
+                'autoGroup': true,
+                'digits': 2,
+                'radixPoint': ".",
+                'digitsOptional': false,
+                'allowMinus': false,
+                'prefix': 'R$ ',
+                'placeholder': ''
+    });
+</script>
+
+
 </head>
-</head>
+
 <body>
 
-	<header layout:insert="/fragmentos/cabecalho"></header>
+	<div class="w3-container">
+		<header layout:insert="/fragmentos/cabecalho" class="estiloCabecalho"></header>
+	</div>
 
-	<section layout:fragment="pesquisa"></section>
-
-	<section layout:fragment="conteudo"></section>
-
+	<div class="w3-container">
+		<section layout:fragment="pesquisa"></section>
+	</div>
+	
+	<div class="w3-container">
+		<section layout:fragment="conteudo"></section>
+	</div>
 
 	<!-- 	<footer layout:insert="rodape"></footer> -->
 
@@ -47,26 +79,34 @@
 
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script src="js/init.js"></script>
-	<script src="js/jquery.maskMoney.min.js"></script>
+
+
+	<script>
+		$(function() {
+			$('#currency').maskMoney({
+				decimal : ',',
+				thousands : '.'
+			});
+		})
+	</script>
+
+
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			var elems = document.querySelectorAll('.modal');
-			var instances = M.Modal.init(elems, options);
+			var elems = document.querySelectorAll('.datepicker');
+			var instances = M.Datepicker.init(elems, options);
 		});
 
 		// Or with jQuery
 
 		$(document).ready(function() {
-			$('.modal').modal();
+			$('.datepicker').datepicker();
 		});
 	</script>
 
-	<script>
-		$(function() {
-			$('#currency').maskMoney({decimal: ',', thousands: '.'});
-		})
-	</script>
-	
+
+
 </body>
 </html>

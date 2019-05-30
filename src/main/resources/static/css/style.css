@@ -34,6 +34,15 @@
 .estiloConfirmação{
 	color: blue;
 }
-.w3-card-4-cartao{
-	width: 50%;
+.estiloDashboard{
+	margin-bottom: 50px;
+	background-color: #FAFAFA;
+	color:#2E64FE;
+}
+
+.estiloCabecalho{
+	margin-bottom: 25px;
+}
+.estiloCartao{
+	margin-right: 10px;
 }

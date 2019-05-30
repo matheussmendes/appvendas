@@ -1,14 +1,14 @@
 package com.appvendas.model;
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.appvendas.model.enums.StatusDoPagamento;
 
@@ -16,19 +16,21 @@ import com.appvendas.model.enums.StatusDoPagamento;
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column
+	@Column(columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
 	private double valor;
 	
 	@Column(nullable = false)
 	@NotNull(message = "Campo obrigatório! Favor preencher")
 	private String descricao;
-	
-	@Column(columnDefinition = "Date", name = "data")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+
+	@Column(columnDefinition = "DATE")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date data;
 
 	@Enumerated(EnumType.STRING)
-	private StatusDoPagamento statusPagamento;
+	@Column
+	private StatusDoPagamento statusDoPagamento;
 	
 
 
@@ -48,12 +50,14 @@ public class Vendas extends AbstractEntity<Long>{
 		this.data = data;
 	}
 
-	public StatusDoPagamento getStatusPagamento() {
-		return statusPagamento;
+	
+
+	public StatusDoPagamento getStatusDoPagamento() {
+		return statusDoPagamento;
 	}
 
-	public void setStatusPagamento(StatusDoPagamento statusPagamento) {
-		this.statusPagamento = statusPagamento;
+	public void setStatusDoPagamento(StatusDoPagamento statusDoPagamento) {
+		this.statusDoPagamento = statusDoPagamento;
 	}
 
 	public double getValor() {
@@ -64,5 +68,5 @@ public class Vendas extends AbstractEntity<Long>{
 		this.valor = valor;
 	}
 
-
+	
 }
