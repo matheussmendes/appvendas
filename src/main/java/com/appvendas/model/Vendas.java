@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -16,24 +17,25 @@ import com.appvendas.model.enums.StatusDoPagamento;
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column(columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
-	@NumberFormat(style = Style.CURRENCY, pattern = "#,##0.00")
+	@Column(columnDefinition = "DECIMAL(7,2)")
+	@NumberFormat(style = Style.CURRENCY)
 	private double valor;
 	
 	@Column(nullable = false)
-	@NotNull(message = "Campo obrigatório! Favor preencher")
+	@NotBlank(message = "Campo 'descrição' não pode estar vazio! Favor preencher")
 	private String descricao;
 
 	@Column(columnDefinition = "DATE")
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date data;
 
+
+	@Column(name = "pagamento")
 	@Enumerated(EnumType.STRING)
-	@Column
 	private StatusDoPagamento statusDoPagamento;
 	
-
-
+	
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -50,16 +52,6 @@ public class Vendas extends AbstractEntity<Long>{
 		this.data = data;
 	}
 
-	
-
-	public StatusDoPagamento getStatusDoPagamento() {
-		return statusDoPagamento;
-	}
-
-	public void setStatusDoPagamento(StatusDoPagamento statusDoPagamento) {
-		this.statusDoPagamento = statusDoPagamento;
-	}
-
 	public double getValor() {
 		return valor;
 	}
@@ -68,5 +60,12 @@ public class Vendas extends AbstractEntity<Long>{
 		this.valor = valor;
 	}
 
-	
+
+	public StatusDoPagamento getStatusDoPagamento() {
+		return statusDoPagamento;
+	}
+
+	public void setStatusDoPagamento(StatusDoPagamento statusDoPagamento) {
+		this.statusDoPagamento = statusDoPagamento;
+	}	
 }

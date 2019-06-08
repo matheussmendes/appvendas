@@ -3,30 +3,36 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns="http://www.w3.org/1999/xhtml">
 
-<nav class="light-blue lighten-1" role="navigation">
-	<div class="nav-wrapper container">
-		<a id="logo-container" href="/painel" class="brand-logo"><img
-			src="/imagens/logoVendas.png" class="estiloIconesDoMenu" />ByMendes</a>
-		<ul class="right hide-on-med-and-down">
-			<li><a href="/lista" title="Lista de vendas"><img class="estiloIconesDoMenu"
-					src="/imagens/list.png" /></a></li>
-			<li><a href="/formulario" title="Efetuar venda"><img
-					class="estiloIconesDoMenu" src="/imagens/sales.png" /></a></li>
-			<li><a href="/formulario" title="Gerar Relatórios"><img
-					class="estiloIconesDoMenu" src="/imagens/report.png" /></a></li>
-			<li><a href="/formulario" title="Sair"><img
-					class="estiloIconesDoMenu" src="/imagens/power2.png" /></a></li>
+<nav class="navbar navbar-expand-lg navbar-light">
+
+	<a class="navbar-brand" href="/painel"><h3 class="estiloDaMarca">Candelabrum</h3></a>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+		aria-expanded="false" aria-label="Alterna navegação">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+			<li><a class="nav-link" href="/painel">
+
+			</a></li>
 
 		</ul>
+		<a class="nav-link" href="/lista"><img src="imagens/sair.png"
+			class="estiloIconeMenu" alt="Sair" /></a>
 
-		<ul id="nav-mobile" class="sidenav">
-			<li><a href="#">Lista de Vendas</a></li>
-			<li><a href="#">Efetuar venda</a></li>
-			<li><a href="#">Sair</a></li>
-		</ul>
-		<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i
-			class="material-icons">menu</i></a>
+		<form class="form-inline my-2 my-lg-0" th:action="@{/buscar}">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Faça aqui sua busca" th:name="descricao">
+			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Procurar</button>
+		</form>
+
 	</div>
+
 </nav>
 
 </html>

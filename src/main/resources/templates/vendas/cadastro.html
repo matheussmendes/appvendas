@@ -3,53 +3,73 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="layout">
 
+
+
 <section layout:fragment="conteudo">
 
-	<div class="container">
-		<div class="section">
-			<div>
+	<form th:action="@{/salvar}" th:object="${vendas}" method="POST">
+		<div class="container">
 
-				<form class="col s12" method="POST" th:action="@{/salvar}"
-					th:object="${vendas}">
+			<input type="hidden" th:field="*{id}" />
 
-					<input type="hidden" th:field="*{id}" />
+			<div class="input-group mb-3">
 
-					<div class="input-field col s6">
-						<i class="material-icons prefix">attach_money</i> <input
-							required="required" th:field="*{valor}" type="text" id="currency" 
-							class="validate" /> <label for="money">Entre com o
-							valor de sua venda ou serviço prestado:</label><span class="helper-text"
-							data-error="campo obrigatório" data-success=""></span>
-					</div>
-					<div class="input-field col s6">
-						<i class="material-icons prefix">mode_edit</i> <input
-							required="required" th:field="*{descricao}" id="descricao"
-							type="text" class="validate" /> <label for="descricao">Descrição
-							da venda ou serviço</label><span class="helper-text"
-							data-error="campo obrigatório" data-success=""></span>
-					</div>
+				<div class="input-group-prepend">
+					<span class="input-group-text">Valor</span>
+				</div>
 
-					<div class="input-field col s6" th:if="*{data != null}">
-						<i class="material-icons prefix">date_range</i> <input
-							th:field=*{data}> 
-					</div> 
-					
-				
-					<div align="center">
+				<input type="text" class="form-control" aria-label="Quantia"
+					th:field="*{valor}" id="demo4" data-thousands=".">
 
-						<button class="btn waves-effect waves-light" type="submit"
-							name="action">
-							Registrar<i class="material-icons right">send</i>
-						</button>
-					</div>
+				<div class="input-group-append">
+					<span class="input-group-text">.00</span>
+				</div>
 
-				</form>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Descrição</span>
+				</div>
+				<input type="text" class="form-control"
+					aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default"
+					th:field="*{descricao}">
+			</div>
+
+			<div class="input-group mb-3" th:if="${id} != null">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Data</span>
+				</div>
+				<input type="text" class="form-control"
+					aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default" th:field="*{data}"
+					data-provide="datepicker" data-date-format="dd/mm/yyyy"
+					data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true">
 			</div>
 
 
-		</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="inputGroupSelect01">Venda/Serviço</label>
+				</div>
+				<select class="custom-select" id="inputGroupSelect01"
+					th:field="*{statusDoPagamento}">
+					<option value="">Paga ou Pendente?</option>
+					<option th:each="s : ${statusDosPagamentos}" th:value="${s}"
+						th:text="${s.descricao}"></option>
+				</select>
+			</div>
 
-	</div>
+			<div style="text-align: center;">
+				<button type="submit" class="btn btn-primary">Registrar</button>
+			</div>
+
+		</div>
+	</form>
+
 </section>
+
+
 
 </html>

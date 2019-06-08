@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" >
+
+
+
+<section layout:fragment="conteudo">
+
+	<div>
+		Erro:<span th:text="${status}"> </span>
+
+	</div>
+
+	<div>
+		<span th:text="${error}"> </span>
+
+	</div>
+
+	<div>
+		<span th:text="${message}"> </span>
+
+	</div>
+
+	<button>
+		<a href="javascript: history.go(-2)">voltar</a>
+	</button>
+
+</section>
+
+
+</html>

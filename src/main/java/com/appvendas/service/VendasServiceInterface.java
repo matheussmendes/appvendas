@@ -35,4 +35,6 @@ public interface VendasServiceInterface {
 	double retornarVendaDiaria();
 	
 	List<Vendas> pesquisarVendasPorDatas(Date dataInicio, Date dataFim);
+	
+	boolean isVendaPendente();
 }

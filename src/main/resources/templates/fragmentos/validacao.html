@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+	<div th:if="${#fields.hasAnyErrors()}" th:fragment="validacao">
+		<div th:each="error : ${#fields.detailedErrors()}">
+			<h5 class="estiloValidação">
+				<span th:text="${error.message}"></span>
+			</h5>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
