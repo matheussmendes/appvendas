@@ -6,7 +6,7 @@
 }
 
 .estiloDoCabecalho{
-	padding-bottom: 30px;
+	padding-bottom: 60px;
 }
 
 .estiloIconeMenu{
@@ -19,4 +19,9 @@
 	width: 15px;
 	height: 15px;
 }
-
+.menuLateral{
+	margin-left: 20px;
+}
+.botaoPesquisa{
+	margin-bottom: 10px;
+}

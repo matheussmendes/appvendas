@@ -90,25 +90,20 @@ public class VendasController {
 	}
 	
 	
-
-	@ModelAttribute("somaDasVendasDiaria")
-	public Double retornarTotalDeVendasDiaria() {
-		return service.retornarVendaDiaria();
-	}
-
 	
-	
-	@ModelAttribute("somaDasVendasDoMes")
-	public Double retornarTotalDeVendasDoMes() {
-		return service.retornarVendaMensal();
-	}
-
-	
-	
-	@ModelAttribute("somaDasVendasDoAno")
-	public Double retornarTotalDeVendasAnual() {
-		return service.retornarVendaAnual();
-	}
+	  @ModelAttribute("somaDasVendasDiaria") public Double
+	  retornarTotalDeVendasDiaria() { return service.retornarVendaDiaria(); }
+	  
+	  
+	  
+	  @ModelAttribute("somaDasVendasDoMes") public Double
+	  retornarTotalDeVendasDoMes() { return service.retornarVendaMensal(); }
+	  
+	  
+	  
+	  @ModelAttribute("somaDasVendasDoAno") public Double
+	  retornarTotalDeVendasAnual() { return service.retornarVendaAnual(); }
+	 
 
 	
 	
@@ -147,9 +142,16 @@ public class VendasController {
 		return StatusDoPagamento.values();
 	}
 	
-	@ModelAttribute("vendaAReceber")
-	public boolean retornarVendaAReceber() {
-		System.out.println("resultado venda pendente ou não" +service.isVendaPendente());
-		return service.isVendaPendente();
+	@RequestMapping("/vendasPendentes")
+	public String listarVendasPendente(ModelMap model) {
+		model.addAttribute("vendas", service.buscarVendasPendentes());
+		return "vendas/vendasPendentes";
 	}
+	
+	
+	
+	  @ModelAttribute("existeVendaPendente") public boolean
+	  informaSeExisteVendaPendente() { return service.existeVendaPendente(); }
+	 
+	 
 }

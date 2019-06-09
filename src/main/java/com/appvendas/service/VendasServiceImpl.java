@@ -1,5 +1,6 @@
 package com.appvendas.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,74 +58,65 @@ public class VendasServiceImpl implements VendasServiceInterface {
 		return dao.findByDescricaoContaining(descricao);
 	}
 
-	@Override
-	public double valorTotalDasVendas() {
-
-		double soma = 0.0;
-
-		for (Vendas v : dao.findAll()) {
-			soma += v.getValor();
-		}
-		return soma;
-	}
-
-	@Override
-	public double retornarVendaMensal() {
-
-		double soma = 0.0;
-
-		for (Vendas v : dao.findAll()) {
-
-			CALENDARIO_DA_VENDA.setTime(v.getData());
-
-			int mesVenda = 1 + CALENDARIO_DA_VENDA.get(Calendar.MONTH);
-			int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
-
-			if (MES_ATUAL == mesVenda && anoVenda == ANO_ATUAL) {
-				soma += v.getValor();
-			}
-		}
-		return soma;
-	}
-
-	@Override
-	public double retornarVendaAnual() {
-
-		double soma = 0.0;
-
-		for (Vendas v : dao.findAll()) {
-
-			CALENDARIO_DA_VENDA.setTime(v.getData());
-
-			int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
-
-			if (anoVenda == ANO_ATUAL) {
-				soma += v.getValor();
-			}
-		}
-
-		return soma;
-	}
-
-	@Override
-	public double retornarVendaDiaria() {
-
-		Calendar hoje = Calendar.getInstance();
-		double soma = 0.0;
-
-		for (Vendas v : dao.findAll()) {
-			CALENDARIO_DA_VENDA.setTime(v.getData());
-
-			if (hoje.get(Calendar.DAY_OF_MONTH) == CALENDARIO_DA_VENDA.get(Calendar.DAY_OF_MONTH)
-					&& hoje.get(Calendar.YEAR) == CALENDARIO_DA_VENDA.get(Calendar.YEAR)) {
-				soma += v.getValor();
-			}
-		}
-		System.out.println(" a venda de hoje é: :::" + CALENDARIO_DA_VENDA.get(Calendar.DAY_OF_MONTH));
-		System.out.println("já a venda hoje do timestamp é: " + hoje.get(Calendar.DAY_OF_MONTH));
-
-		return soma;
-	}
+	
+	
+	  @Override public double valorTotalDasVendas() {
+	  
+	  double soma = 0.0;
+	  
+	  for (Vendas v : dao.findAll()) { soma += v.getValor(); } return soma; }
+	  
+	  
+	  @Override public double retornarVendaMensal() {
+	  
+	  double soma = 0.0;
+	  
+	  for (Vendas v : dao.findAll()) {
+	  
+	  CALENDARIO_DA_VENDA.setTime(v.getData());
+	  
+	  int mesVenda = 1 + CALENDARIO_DA_VENDA.get(Calendar.MONTH); int anoVenda =
+	  CALENDARIO_DA_VENDA.get(Calendar.YEAR);
+	  
+	  if (MES_ATUAL == mesVenda && anoVenda == ANO_ATUAL) { soma += v.getValor(); }
+	  } return soma; }
+	  
+	  
+	  
+	  @Override public double retornarVendaAnual() {
+	  
+	  double soma = 0.0;
+	  
+	  for (Vendas v : dao.findAll()) {
+	  
+	  CALENDARIO_DA_VENDA.setTime(v.getData());
+	  
+	  int anoVenda = CALENDARIO_DA_VENDA.get(Calendar.YEAR);
+	  
+	  if (anoVenda == ANO_ATUAL) { soma += v.getValor(); } }
+	  
+	  return soma; }
+	  
+	  
+	  
+	  @Override public double retornarVendaDiaria() {
+	  
+	  Calendar hoje = Calendar.getInstance(); 
+	  double soma = 0.0;
+	  
+	  for (Vendas v : dao.findAll()) { CALENDARIO_DA_VENDA.setTime(v.getData());
+	  
+	  if (hoje.get(Calendar.DAY_OF_MONTH) ==
+	  CALENDARIO_DA_VENDA.get(Calendar.DAY_OF_MONTH) && hoje.get(Calendar.YEAR) ==
+	  CALENDARIO_DA_VENDA.get(Calendar.YEAR)) { soma += v.getValor(); } }
+	  System.out.println(" a venda de hoje é: :::" +
+	  CALENDARIO_DA_VENDA.get(Calendar.DAY_OF_MONTH));
+	  System.out.println("já a venda hoje do timestamp é: " +
+	  hoje.get(Calendar.DAY_OF_MONTH));
+	  
+	  return soma; }
+	 
+	 
 
 	@Override
 	public List<Vendas> pesquisarVendasPorDatas(Date dataInicio, Date dataFim) {
@@ -184,8 +176,35 @@ public class VendasServiceImpl implements VendasServiceInterface {
 		return count;
 	}
 
+
+
 	@Override
-	public boolean isVendaPendente() {
-	return false;
+	public List<Vendas> buscarVendasPendentes() {
+		List<Vendas> vendasPendentes = new ArrayList<Vendas>();
+		for(Vendas v : dao.findAll()) {
+			if(v.isPendente()) {
+				vendasPendentes.add(v);
+			}
+		}
+		return vendasPendentes;
 	}
+
+
+	public boolean existeVendaPendente() {
+		boolean x = false;
+		int count = 0;
+		for(Vendas v : dao.findAll()) {
+			if(v.isPendente() == true) {
+				count ++;
+			}
+			if(count > 0) {
+				x = true;
+			}
+			else {
+				x = false;
+			}
+		}
+		return x;
+	}
+
 }

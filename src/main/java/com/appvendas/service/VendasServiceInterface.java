@@ -12,29 +12,30 @@ import com.appvendas.model.Vendas;
 public interface VendasServiceInterface {
 
 	void salvar(Vendas vendas);
-	
+
 	void editar(Long id);
-	
+
 	void excluir(Vendas vendas);
-	
+
 	List<Vendas> listarTodasAsVendas();
-	
+
 	Optional<Vendas> buscarPorVenda(Long id);
-	
-	
-	//implementações específicas
-	
+
+	// implementações específicas
+
 	List<Vendas> pesquisarPorDescricao(String descricao);
-	
+
+	List<Vendas> buscarVendasPendentes();
+
 	double valorTotalDasVendas();
-	
+
 	double retornarVendaMensal();
-	
+
 	double retornarVendaAnual();
-	
+
 	double retornarVendaDiaria();
-	
+
 	List<Vendas> pesquisarVendasPorDatas(Date dataInicio, Date dataFim);
-	
-	boolean isVendaPendente();
+
+
 }

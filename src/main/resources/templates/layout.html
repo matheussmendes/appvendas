@@ -21,23 +21,23 @@
 
 <body>
 
-
 	<header layout:insert="/fragmentos/cabecalho" class="estiloDoCabecalho">
 	</header>
 
+	<div class="row">
 
-	<div layout:insert="/fragmentos/alertas" class="estiloAlerta"></div>
+		<div class="menuLateral">
+			<nav layout:insert="/fragmentos/menuLateral"></nav>
+		</div>
 
+		<div class="container">
 
-	<aside>
-		<nav layout:insert="/fragmentos/menuLateral"></nav>
-	</aside>
+			<div layout:insert="/fragmentos/alertas" class="estiloAlerta"></div>
+			<div layout:fragment="conteudo" class="estiloDoConteudo"></div>
+		
+		</div>
 
-	<section class="estiloConteudo">
-		<div layout:fragment="conteudo" class="estiloDoConteudo"></div>
-	</section>
-
-
+	</div>
 
 
 	<script>

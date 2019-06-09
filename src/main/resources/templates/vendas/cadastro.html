@@ -45,20 +45,16 @@
 					aria-label="Exemplo do tamanho do input"
 					aria-describedby="inputGroup-sizing-default" th:field="*{data}"
 					data-provide="datepicker" data-date-format="dd/mm/yyyy"
-					data-date-language="pt-BR" data-date-autoclose="true" data-date-today-highlight="true">
+					data-date-language="pt-BR" data-date-autoclose="true"
+					data-date-today-highlight="true">
 			</div>
 
 
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<label class="input-group-text" for="inputGroupSelect01">Venda/Serviço</label>
-				</div>
-				<select class="custom-select" id="inputGroupSelect01"
-					th:field="*{statusDoPagamento}">
-					<option value="">Paga ou Pendente?</option>
-					<option th:each="s : ${statusDosPagamentos}" th:value="${s}"
-						th:text="${s.descricao}"></option>
-				</select>
+
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" th:field="*{pendente}"
+					id="defaultCheck1"> <label class="form-check-label"
+					for="defaultCheck1">Marque se a venda/serviço não foi paga</label>
 			</div>
 
 			<div style="text-align: center;">

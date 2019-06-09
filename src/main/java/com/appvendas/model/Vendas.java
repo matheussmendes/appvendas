@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
@@ -17,7 +16,7 @@ import com.appvendas.model.enums.StatusDoPagamento;
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column(columnDefinition = "DECIMAL(7,2)")
+	@Column()
 	@NumberFormat(style = Style.CURRENCY)
 	private double valor;
 	
@@ -29,6 +28,8 @@ public class Vendas extends AbstractEntity<Long>{
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date data;
 
+	@Column
+	private boolean pendente;
 
 	@Column(name = "pagamento")
 	@Enumerated(EnumType.STRING)
@@ -67,5 +68,15 @@ public class Vendas extends AbstractEntity<Long>{
 
 	public void setStatusDoPagamento(StatusDoPagamento statusDoPagamento) {
 		this.statusDoPagamento = statusDoPagamento;
+	}
+
+	public boolean isPendente() {
+		return pendente;
+	}
+
+	public void setPendente(boolean pendente) {
+		this.pendente = pendente;
 	}	
+	
+	
 }

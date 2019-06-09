@@ -14,4 +14,6 @@ public interface VendasDaoInterface extends CrudRepository<Vendas, Long>{
 	
 	List<Vendas> findByDataBetween(Date dataInicial, Date dataFinal);
 	
+	List<Vendas> findByPendenteTrue();
+	
 }
