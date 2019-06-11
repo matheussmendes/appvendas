@@ -34,7 +34,7 @@
 
 			<div layout:insert="/fragmentos/alertas" class="estiloAlerta"></div>
 			<div layout:fragment="conteudo" class="estiloDoConteudo"></div>
-		
+
 		</div>
 
 	</div>
@@ -43,7 +43,13 @@
 	<script>
 		$("#demo4").maskMoney();
 	</script>
-
+	
+	<script>
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
+	
 	<script src="/js/jquery"></script>
 	<script src="/js/bootstrap-datepicker.js"></script>
 	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>

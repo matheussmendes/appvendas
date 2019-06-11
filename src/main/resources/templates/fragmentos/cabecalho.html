@@ -5,7 +5,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-light">
 
-	<a class="navbar-brand" href="/painel"><h3 class="estiloDaMarca">Candelabrum</h3>
+	<a class="navbar-brand" href="/painel"><h3 class="estiloDaMarca" data-toggle="tooltip" data-placement="right"
+		title="Registre suas vendas conosco">byMendes</h3>
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -22,7 +23,8 @@
 
 		</ul>
 		<a class="nav-link" href="/lista"><img src="imagens/power10.png"
-			class="estiloIconeMenu" alt="Sair" /></a>
+			class="estiloIconeMenu" alt="Sair" data-toggle="tooltip" data-placement="left"
+		title="Sair"/></a>
 
 		<form class="form-inline my-2 my-lg-0" th:action="@{/buscar}">
 			<input class="form-control mr-sm-2" type="search"

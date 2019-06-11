@@ -34,6 +34,10 @@ public interface VendasServiceInterface {
 	double retornarVendaAnual();
 
 	double retornarVendaDiaria();
+	
+	Long contarAQuantidadeDeVendasPendentes();
+	
+	double somarAsVendasPendentes();
 
 	List<Vendas> pesquisarVendasPorDatas(Date dataInicio, Date dataFim);
 

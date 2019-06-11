@@ -9,8 +9,35 @@
 <section layout:fragment="conteudo">
 
 	<div class="container">
-		
-		<table class="table table-hover" >
+		<div class="shadow p-3 mb-5 bg-white rounded">
+			<h6 class="text-primary">Monitore suas Vendas ou Serviços a Receber</h6>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card text-white bg-danger mb-3"
+					style="max-width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Quantidade de Vendas/Serviços a
+							Receber:</h5>
+						<span th:text="${quantidadeDeVendasPendentes}"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="card text-white bg-warning mb-3"
+					style="max-width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Soma das Vendas/Serviços a Receber:</h5>
+						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /> <span
+							th:text="${somaDasVendasPendentes}"></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
@@ -27,7 +54,8 @@
 					<td th:text="${v.descricao}">Mark</td>
 					<td th:text="${v.valor}">Mark</td>
 					<td th:text="${v.data}">Mark</td>
-					<td><img src="/imagens/pendente2.png" class="estiloIconesDaTabela"/></td>
+					<td><img src="/imagens/pendente2.png"
+						class="estiloIconesDaTabela" /></td>
 					<td><a th:href="@{/{id} (id = ${v.id})}"><img
 							src="/imagens/editar.png" class="estiloIconesDaTabela" /></a> &nbsp;
 						&nbsp; &nbsp; <a th:href="@{/deletar/{id} (id = ${v.id})}"><img

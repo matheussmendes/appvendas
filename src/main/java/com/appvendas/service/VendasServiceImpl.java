@@ -206,5 +206,29 @@ public class VendasServiceImpl implements VendasServiceInterface {
 		}
 		return x;
 	}
+	
+	@Override
+	public Long contarAQuantidadeDeVendasPendentes() {
+		Long quantidadeDeVendasPendentes = 0L;
+		for(Vendas v : dao.findAll()) {
+			if(v.isPendente() == true) {
+				quantidadeDeVendasPendentes ++;
+			}
+		}
+		return quantidadeDeVendasPendentes;
+	}
+
+	@Override
+	public double somarAsVendasPendentes() {
+		double somaDasVendasPendentes = 0.0;
+	
+		for(Vendas v : dao.findAll()) {
+			if(v.isPendente() == true) {
+				somaDasVendasPendentes += v.getValor();
+			}
+		}
+		return somaDasVendasPendentes;
+	}
+
 
 }

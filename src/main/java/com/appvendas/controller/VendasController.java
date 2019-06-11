@@ -24,7 +24,6 @@ public class VendasController {
 	@Autowired
 	private VendasServiceImpl service;
 
-	
 	@RequestMapping("/formulario")
 	public String formulario(Vendas vendas) {
 		return "/vendas/cadastro";
@@ -34,22 +33,19 @@ public class VendasController {
 	public String exibirPaginaDeAutenticacao() {
 		return "/acesso/login";
 	}
-	
+
 	@RequestMapping(path = "/lista")
 	public String listar(ModelMap model) {
 		model.addAttribute("vendas", service.listarTodasAsVendas());
 		return "/vendas/lista";
 	}
 
-	
-	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvar(@Valid Vendas vendas, BindingResult result, RedirectAttributes ra) {
-		Date data = new Date();		
-		  if (vendas.getId() == null && !result.hasErrors()) { 
-			  vendas.setData(data); 
-			  }	 
-		  else if(result.hasErrors()) {
+		Date data = new Date();
+		if (vendas.getId() == null && !result.hasErrors()) {
+			vendas.setData(data);
+		} else if (result.hasErrors()) {
 			return "/vendas/cadastro";
 		}
 		service.salvar(vendas);
@@ -57,56 +53,45 @@ public class VendasController {
 		return "redirect:/formulario";
 	}
 
-	
-	
 	@RequestMapping("/buscar")
 	public String pesquisarPorDescricao(@RequestParam("descricao") String descricao, ModelMap model) {
 		model.addAttribute("vendas", service.pesquisarPorDescricao(descricao));
 		return "/vendas/lista";
 	}
 
-	
-	
 	@RequestMapping("/painel")
 	public String exibirPainel(Vendas vendas) {
 		return "/vendas/painel";
 	}
 
-	
-	
 	@RequestMapping("/{id}")
 	public String editar(@PathVariable("id") Vendas vendas, ModelMap model) {
 		model.addAttribute(vendas);
 		return "/vendas/cadastro";
 	}
 
-	
-	
 	@RequestMapping("/deletar/{id}")
 	public String excluir(@PathVariable("id") Vendas vendas, RedirectAttributes ra) {
 		service.excluir(vendas);
 		ra.addFlashAttribute("mensagemDeSucesso", "Venda excluída com sucesso!!!");
 		return "redirect:/lista";
 	}
-	
-	
-	
-	  @ModelAttribute("somaDasVendasDiaria") public Double
-	  retornarTotalDeVendasDiaria() { return service.retornarVendaDiaria(); }
-	  
-	  
-	  
-	  @ModelAttribute("somaDasVendasDoMes") public Double
-	  retornarTotalDeVendasDoMes() { return service.retornarVendaMensal(); }
-	  
-	  
-	  
-	  @ModelAttribute("somaDasVendasDoAno") public Double
-	  retornarTotalDeVendasAnual() { return service.retornarVendaAnual(); }
-	 
 
-	
-	
+	@ModelAttribute("somaDasVendasDiaria")
+	public Double retornarTotalDeVendasDiaria() {
+		return service.retornarVendaDiaria();
+	}
+
+	@ModelAttribute("somaDasVendasDoMes")
+	public Double retornarTotalDeVendasDoMes() {
+		return service.retornarVendaMensal();
+	}
+
+	@ModelAttribute("somaDasVendasDoAno")
+	public Double retornarTotalDeVendasAnual() {
+		return service.retornarVendaAnual();
+	}
+
 	@RequestMapping("/buscarPorDatas")
 	public String pesquisarVendasPorDatas(@RequestParam("dataInicio") @DateTimeFormat(iso = ISO.DATE) Date dataInicio,
 			@RequestParam("dataFim") @DateTimeFormat(iso = ISO.DATE) Date dataFim, ModelMap model) {
@@ -114,44 +99,44 @@ public class VendasController {
 		return "/vendas/lista";
 	}
 
-	
-	
 	@ModelAttribute("quantidadeDeVendasDiarias")
 	public Long retornarQuantidadeDeVendasDiarias() {
 		return service.retornarQuantidadeDeVendaDiaria();
 	}
-	
-	
-	
+
 	@ModelAttribute("quantidadeDeVendasAnual")
 	public Long retornarQuantidadeDeVendasAnual() {
 		return service.retornarQuantidadeDeVendaAnual();
 	}
-	
-	
-	
+
 	@ModelAttribute("quantidadeDeVendasMensal")
 	public Long retornarQuantidadeDeVendasMensal() {
 		return service.retornarQuantidadeDeVendaAnual();
 	}
-	
-	
-	
+
 	@ModelAttribute("statusDosPagamentos")
 	public StatusDoPagamento[] getStatusDoPagamento() {
 		return StatusDoPagamento.values();
 	}
-	
+
 	@RequestMapping("/vendasPendentes")
 	public String listarVendasPendente(ModelMap model) {
 		model.addAttribute("vendas", service.buscarVendasPendentes());
 		return "vendas/vendasPendentes";
 	}
+
+	@ModelAttribute("existeVendaPendente")
+	public boolean informaSeExisteVendaPendente() {
+		return service.existeVendaPendente();
+	}
+
+	@ModelAttribute("quantidadeDeVendasPendentes")
+	public Long contarQuantidadeDeVendasPendentes() {
+		return service.contarAQuantidadeDeVendasPendentes();
+	}
 	
-	
-	
-	  @ModelAttribute("existeVendaPendente") public boolean
-	  informaSeExisteVendaPendente() { return service.existeVendaPendente(); }
-	 
-	 
+	@ModelAttribute("somaDasVendasPendentes")
+	public double informarASomaDasVendasPendentes() {
+		return service.somarAsVendasPendentes();
+	}
 }
