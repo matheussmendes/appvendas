@@ -20,7 +20,7 @@
 					aria-describedby="inputGroup-sizing-default"
 					data-provide="datepicker" data-date-format="dd/mm/yyyy"
 					data-date-language="pt-BR" data-date-autoclose="true"
-					data-date-today-highlight="true" data-date-orientation="top">
+					data-date-today-highlight="true" data-date-orientation="right">
 			</div>
 			<label>Data Final</label>
 			<div class="input-group mb-3">
@@ -32,7 +32,7 @@
 					aria-describedby="inputGroup-sizing-default"
 					data-provide="datepicker" data-date-format="dd/mm/yyyy"
 					data-date-language="pt-BR" data-date-autoclose="true"
-					data-date-today-highlight="true" data-date-orientation="top">
+					data-date-today-highlight="true" data-date-orientation="right">
 			</div>
 
 			<div style="text-align: center" class="botaoPesquisa">
@@ -56,7 +56,7 @@
 					<td th:text="${v.id}"></td>
 					<td th:text="${v.descricao}">Mark</td>
 					<td th:text="${v.valor}">Mark</td>
-					<td th:text="${v.data}">Mark</td>
+					<td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}"></td>
 					<td th:if="${v.pendente} == false"><img src="/imagens/paga.png"
 						class="estiloIconesDaTabela"></td>
 					<td th:if="${v.pendente} == true"><img src="/imagens/pendente2.png"

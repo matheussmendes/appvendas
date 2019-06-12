@@ -1,5 +1,6 @@
 package com.appvendas.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,9 @@ public interface VendasDaoInterface extends CrudRepository<Vendas, Long>{
 
 	List<Vendas> findByDescricaoContaining(String descricao);
 	
-	List<Vendas> findByDataBetween(Date dataInicial, Date dataFinal);
+	List<Vendas> findByDataBetween(LocalDate dataInicial, LocalDate dataFinal);
 	
 	List<Vendas> findByPendenteTrue();
 	
+	;
 }

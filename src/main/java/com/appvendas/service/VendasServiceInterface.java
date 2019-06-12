@@ -29,17 +29,19 @@ public interface VendasServiceInterface {
 
 	double valorTotalDasVendas();
 
-	double retornarVendaMensal();
-
-	double retornarVendaAnual();
-
-	double retornarVendaDiaria();
+	boolean isVendaPendente();
 	
+	double retornarVendaMensal();
+	  
+	double retornarVendaAnual();
+	  
+	double retornarVendaDiaria();
+	 
 	Long contarAQuantidadeDeVendasPendentes();
 	
 	double somarAsVendasPendentes();
 
-	List<Vendas> pesquisarVendasPorDatas(Date dataInicio, Date dataFim);
+	List<Vendas> pesquisarVendasPorDatas(LocalDate dataInicio, LocalDate dataFim);
 
 
 }

@@ -17,7 +17,7 @@
 				<div class="card text-white bg-danger mb-3"
 					style="max-width: 18rem;">
 					<div class="card-body">
-						<h5 class="card-title">Quantidade de Vendas/Serviços a
+						<h5 class="card-title">Vendas/Serviços a
 							Receber:</h5>
 						<span th:text="${quantidadeDeVendasPendentes}"></span>
 					</div>
@@ -53,7 +53,7 @@
 					<td th:text="${v.id}"></td>
 					<td th:text="${v.descricao}">Mark</td>
 					<td th:text="${v.valor}">Mark</td>
-					<td th:text="${v.data}">Mark</td>
+					<td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}">Mark</td>
 					<td><img src="/imagens/pendente2.png"
 						class="estiloIconesDaTabela" /></td>
 					<td><a th:href="@{/{id} (id = ${v.id})}"><img

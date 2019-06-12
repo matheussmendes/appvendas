@@ -8,6 +8,10 @@
 <section layout:fragment="conteudo">
 
 	<form th:action="@{/salvar}" th:object="${vendas}" method="POST">
+
+		<div layout:insert="/mensagens/validacao"></div>
+		<div layout:insert="/mensagens/alertas"></div>
+		
 		<div class="container">
 
 			<input type="hidden" th:field="*{id}" />
@@ -19,7 +23,7 @@
 				</div>
 
 				<input type="text" class="form-control" aria-label="Quantia"
-					th:field="*{valor}" id="demo4" data-thousands=".">
+					th:field="*{valor}" id="demo4" data-thousands="." >
 
 				<div class="input-group-append">
 					<span class="input-group-text">.00</span>
@@ -55,12 +59,14 @@
 				<div class="input-group-prepend">
 					<div class="input-group-text">
 						<input type="checkbox"
-							aria-label="Chebox para permitir input text" th:field="*{pendente}">
+							aria-label="Chebox para permitir input text"
+							th:field="*{pendente}">
 					</div>
 				</div>
 				<input type="text" class="form-control"
-					aria-label="Input text com checkbox" 
-					placeholder="Marque se a venda ou serviço prestado não foi pago" disabled="disabled">
+					aria-label="Input text com checkbox"
+					placeholder="Marque se a venda ou serviço prestado não foi pago"
+					disabled="disabled">
 			</div>
 
 			<div style="text-align: center;">

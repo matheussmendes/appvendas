@@ -1,20 +1,14 @@
 package com.appvendas.model;
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
-
-import com.appvendas.model.enums.StatusDoPagamento;
 
 @SuppressWarnings("serial")
 @Entity
@@ -24,22 +18,17 @@ public class Vendas extends AbstractEntity<Long>{
 	@NumberFormat(style = Style.CURRENCY)
 	private double valor;
 	
-	@Column(nullable = false)
-	@NotBlank(message = "Campo 'descrição' não pode estar vazio! Favor preencher")
+	@Column(nullable = false, length = 50)
+	@NotBlank(message = "Campo 'descrição' não pode estar vazio! Favor preencher.")
+	@Size(min = 5, max = 50, message = "O campo descrição deve ter entre {min} e {max} caracteres.")
 	private String descricao;
 
 	@Column(columnDefinition = "DATE")
-	@DateTimeFormat(iso = ISO.DATE, pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	private Date data;
+	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
+	private LocalDate data;
 
 	@Column
 	private boolean pendente;
-
-	@Column(name = "pagamento")
-	@Enumerated(EnumType.STRING)
-	private StatusDoPagamento statusDoPagamento;
-	
 
 	
 	public String getDescricao() {
@@ -50,11 +39,11 @@ public class Vendas extends AbstractEntity<Long>{
 		this.descricao = descricao;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -66,15 +55,6 @@ public class Vendas extends AbstractEntity<Long>{
 		this.valor = valor;
 	}
 
-
-	public StatusDoPagamento getStatusDoPagamento() {
-		return statusDoPagamento;
-	}
-
-	public void setStatusDoPagamento(StatusDoPagamento statusDoPagamento) {
-		this.statusDoPagamento = statusDoPagamento;
-	}
-
 	public boolean isPendente() {
 		return pendente;
 	}
@@ -82,6 +62,4 @@ public class Vendas extends AbstractEntity<Long>{
 	public void setPendente(boolean pendente) {
 		this.pendente = pendente;
 	}	
-	
-	
 }

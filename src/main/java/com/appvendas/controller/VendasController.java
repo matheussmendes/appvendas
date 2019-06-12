@@ -1,8 +1,12 @@
 package com.appvendas.controller;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.TimeZone;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
@@ -15,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.appvendas.model.Vendas;
-import com.appvendas.model.enums.StatusDoPagamento;
 import com.appvendas.service.VendasServiceImpl;
 
 @Controller
@@ -42,9 +45,11 @@ public class VendasController {
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvar(@Valid Vendas vendas, BindingResult result, RedirectAttributes ra) {
-		Date data = new Date();
+
+		LocalDate agora = LocalDate.now();
+
 		if (vendas.getId() == null && !result.hasErrors()) {
-			vendas.setData(data);
+			vendas.setData(agora);
 		} else if (result.hasErrors()) {
 			return "/vendas/cadastro";
 		}
@@ -93,9 +98,11 @@ public class VendasController {
 	}
 
 	@RequestMapping("/buscarPorDatas")
-	public String pesquisarVendasPorDatas(@RequestParam("dataInicio") @DateTimeFormat(iso = ISO.DATE) Date dataInicio,
-			@RequestParam("dataFim") @DateTimeFormat(iso = ISO.DATE) Date dataFim, ModelMap model) {
+	public String pesquisarVendasPorDatas(
+			@RequestParam("dataInicio") @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy") LocalDate dataInicio,
+			@RequestParam("dataFim") @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy") LocalDate dataFim, ModelMap model) {
 		model.addAttribute("vendas", service.pesquisarVendasPorDatas(dataInicio, dataFim));
+
 		return "/vendas/lista";
 	}
 
@@ -104,19 +111,14 @@ public class VendasController {
 		return service.retornarQuantidadeDeVendaDiaria();
 	}
 
-	@ModelAttribute("quantidadeDeVendasAnual")
-	public Long retornarQuantidadeDeVendasAnual() {
-		return service.retornarQuantidadeDeVendaAnual();
-	}
-
 	@ModelAttribute("quantidadeDeVendasMensal")
 	public Long retornarQuantidadeDeVendasMensal() {
 		return service.retornarQuantidadeDeVendaAnual();
 	}
 
-	@ModelAttribute("statusDosPagamentos")
-	public StatusDoPagamento[] getStatusDoPagamento() {
-		return StatusDoPagamento.values();
+	@ModelAttribute("quantidadeDeVendasAnual")
+	public Long retornarQuantidadeDeVendasAnual() {
+		return service.retornarQuantidadeDeVendaAnual();
 	}
 
 	@RequestMapping("/vendasPendentes")
@@ -134,7 +136,7 @@ public class VendasController {
 	public Long contarQuantidadeDeVendasPendentes() {
 		return service.contarAQuantidadeDeVendasPendentes();
 	}
-	
+
 	@ModelAttribute("somaDasVendasPendentes")
 	public double informarASomaDasVendasPendentes() {
 		return service.somarAsVendasPendentes();
