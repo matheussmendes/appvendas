@@ -55,7 +55,7 @@
 				<tr th:each="v : ${vendas}">
 					<td th:text="${v.id}"></td>
 					<td th:text="${v.descricao}">Mark</td>
-					<td th:text="${v.valor}">Mark</td>
+					<td th:text="${#numbers.formatDecimal(v.valor, 1, 'DEFAULT', 2, 'DEFAULT')}">Mark</td>
 					<td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}"></td>
 					<td th:if="${v.pendente} == false"><img src="/imagens/paga.png"
 						class="estiloIconesDaTabela"></td>

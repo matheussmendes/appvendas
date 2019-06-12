@@ -14,8 +14,8 @@ import org.springframework.format.annotation.NumberFormat.Style;
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column()
-	@NumberFormat(style = Style.CURRENCY)
+	@Column(columnDefinition = "DECIMAL(7,2)")
+	@NumberFormat(style = Style.CURRENCY, pattern = "#,#00.00")
 	private double valor;
 	
 	@Column(nullable = false, length = 50)
