@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,7 @@ public class Vendas extends AbstractEntity<Long>{
 
 	@Column(columnDefinition = "DATE")
 	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
+	@PastOrPresent(message = "A data não pode ser futura. Verifique-a por favor!")
 	private LocalDate data;
 
 	@Column

@@ -11,7 +11,7 @@
 
 		<div layout:insert="/mensagens/validacao"></div>
 		<div layout:insert="/mensagens/alertas"></div>
-		
+
 		<div class="container">
 
 			<input type="hidden" th:field="*{id}" />
@@ -23,8 +23,8 @@
 				</div>
 
 				<input type="text" class="form-control" aria-label="Quantia"
-					th:field="*{valor}" id="demo4" data-thousands="." data-decimal=","   >
-
+					th:field="*{valor}" id="demo4" data-thousands="." data-decimal=","
+					th:classappend="${#fields.hasErrors('valor')} ? 'is-invalid'">
 				<div class="input-group-append">
 					<span class="input-group-text">.00</span>
 				</div>
@@ -35,10 +35,11 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="inputGroup-sizing-default">Descrição</span>
 				</div>
-				<input type="text" class="form-control"
-					aria-label="Exemplo do tamanho do input"
+				<label for="desc"></label> <input type="text" class="form-control"
+					id="desc" aria-label="Exemplo do tamanho do input"
 					aria-describedby="inputGroup-sizing-default"
-					th:field="*{descricao}">
+					th:field="*{descricao}"
+					th:classappend="${#fields.hasErrors('valor')} ? 'is-invalid'">
 			</div>
 
 			<div class="input-group mb-3" th:if="${id} != null">
@@ -52,8 +53,6 @@
 					data-date-language="pt-BR" data-date-autoclose="true"
 					data-date-today-highlight="true">
 			</div>
-
-
 
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">

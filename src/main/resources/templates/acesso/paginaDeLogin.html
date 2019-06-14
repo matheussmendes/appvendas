@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/acesso/login">
+
+
+<div layout:fragment="conteudo">
+
+	<div class="container" >
+		<form>
+
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+					<h1 class="display-4">Registre suas vendas ou prestação de
+						serviços Conosco.</h1>
+					<p class="lead">Tenha o controle de seus ganhos diários,
+						mensais, anuais e acompanhe as vendas ou prestação de serviços que
+						ainda não recebeu. Tudo isso de maneira simples e eficiente. Faça
+						seu cadastro e comece hoje mesmo a utilizar nossa plataforma</p>
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">CNPJ</span>
+				</div>
+				<label for="desc"></label> <input type="text" class="form-control"
+					id="desc" aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default">
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Nome
+						Fantasia</span>
+				</div>
+				<label for="desc"></label> <input type="text" class="form-control"
+					id="desc" aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default">
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">E-mail
+					</span>
+				</div>
+				<label for="desc"></label> <input type="email" class="form-control"
+					id="desc" aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default">
+			</div>
+
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Senha
+					</span>
+				</div>
+				<label for="desc"></label> <input type="password"
+					class="form-control" id="desc"
+					aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default">
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="inputGroupSelect01">Segmento
+						De Atuação</label>
+				</div>
+				<select class="custom-select" id="inputGroupSelect01">
+					<option selected>Escolher...</option>
+					<option value="1">Mercado</option>
+					<option value="2">Frutaria</option>
+					<option value="3">Lanchonete</option>
+					<option value="1">Padaria</option>
+					<option value="2">Sorveteria</option>
+					<option value="3">Açougue</option>
+					<option value="3">Outros</option>
+				</select>
+			</div>
+			<div style="text-align: center">
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</div>
+
+
+
+		</form>
+	</div>
+
+</div>
+</html>

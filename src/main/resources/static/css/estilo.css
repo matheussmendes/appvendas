@@ -4,6 +4,12 @@
 	font-style: inherit;
 	text-decoration: overline;
 }
+.estiloDaMarcaLogin{
+	font: larger;
+	color: white;
+	font-style: inherit;
+	text-decoration: overline;
+}
 
 .estiloDoCabecalho{
 	padding-bottom: 60px;
@@ -24,4 +30,13 @@
 }
 .botaoPesquisa{
 	margin-bottom: 10px;
+}
+
+.estiloCorpo{
+	background-color: #2E9AFE;
+}
+.estiloRodape1{
+	text-align: center;
+	color: white;
+	margin-top: 50px;
 }
