@@ -6,17 +6,25 @@
 
 <div layout:fragment="conteudo">
 
-	<div class="container" >
-		<form>
+	<div class="container">
+		<form th:action="@{/salvarEmpreendimento}"
+			th:object="${empreendimento}" method="POST">
+
+			<div layout:insert="/mensagens/alertas"></div>
+			<div layout:insert="/mensagens/validacao"></div>
+
+			<input type="hidden" th:field="*{id}"></input>
 
 			<div class="jumbotron jumbotron-fluid">
 				<div class="container">
-					<h1 class="display-4">Registre suas vendas ou prestação de
-						serviços Conosco.</h1>
+					<h3 class="display-4">Você registra suas vendas e/ou prestação
+						de serviços em papel? Não possui o controle das entradas de seu
+						empreendimento?</h3>
 					<p class="lead">Tenha o controle de seus ganhos diários,
-						mensais, anuais e acompanhe as vendas ou prestação de serviços que
-						ainda não recebeu. Tudo isso de maneira simples e eficiente. Faça
-						seu cadastro e comece hoje mesmo a utilizar nossa plataforma</p>
+						mensais, anuais e consiga acompanhar as vendas ou prestação de
+						serviços que ainda não recebeu. Tudo isso de maneira simples e
+						eficiente. Faça seu cadastro e comece hoje mesmo a utilizar nossa
+						plataforma nirvana</p>
 				</div>
 			</div>
 
@@ -26,7 +34,8 @@
 				</div>
 				<label for="desc"></label> <input type="text" class="form-control"
 					id="desc" aria-label="Exemplo do tamanho do input"
-					aria-describedby="inputGroup-sizing-default">
+					aria-describedby="inputGroup-sizing-default" th:field="*{cnpj}"
+					placeholder="Entre com o CPNJ de seu empreendimento">
 			</div>
 
 			<div class="input-group mb-3">
@@ -36,7 +45,8 @@
 				</div>
 				<label for="desc"></label> <input type="text" class="form-control"
 					id="desc" aria-label="Exemplo do tamanho do input"
-					aria-describedby="inputGroup-sizing-default">
+					aria-describedby="inputGroup-sizing-default"
+					th:field="*{nomeFantasia}" placeholder="Nome de seu empreendimento">
 			</div>
 
 			<div class="input-group mb-3">
@@ -46,7 +56,9 @@
 				</div>
 				<label for="desc"></label> <input type="email" class="form-control"
 					id="desc" aria-label="Exemplo do tamanho do input"
-					aria-describedby="inputGroup-sizing-default">
+					aria-describedby="inputGroup-sizing-default"
+					th:field="*{acesso.email}"
+					placeholder="Insira um e-mail pelo qual você irá logar">
 			</div>
 
 
@@ -58,7 +70,9 @@
 				<label for="desc"></label> <input type="password"
 					class="form-control" id="desc"
 					aria-label="Exemplo do tamanho do input"
-					aria-describedby="inputGroup-sizing-default">
+					aria-describedby="inputGroup-sizing-default"
+					th:field="*{acesso.senha}"
+					placeholder="Defina uma senha segura para acesso">
 			</div>
 
 			<div class="input-group mb-3">
@@ -66,17 +80,30 @@
 					<label class="input-group-text" for="inputGroupSelect01">Segmento
 						De Atuação</label>
 				</div>
-				<select class="custom-select" id="inputGroupSelect01">
-					<option selected>Escolher...</option>
-					<option value="1">Mercado</option>
-					<option value="2">Frutaria</option>
-					<option value="3">Lanchonete</option>
-					<option value="1">Padaria</option>
-					<option value="2">Sorveteria</option>
-					<option value="3">Açougue</option>
-					<option value="3">Outros</option>
+				<select class="custom-select" id="inputGroupSelect01"
+					th:field="*{tipoDoEmpreendimento}">
+					<option value="" selected="selected">Tipo de seu
+						Empreendimento</option>
+					<option th:each="tipo : ${segmentosDeAtuacao}" th:value="${tipo}"
+						th:text="${tipo.descricao}">Escolher...</option>
+
 				</select>
 			</div>
+
+			<div class="input-group mb-3">
+				<div class="form-group col-md-6"
+					th:classappend="${#fields.hasErrors('meta.valorDaMeta')} ? has-error">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">Meta de receita
+						</span>
+					</div>
+					<label class="control-label" for="input-produto-descricao">Meta
+						estabelecida para o Mês:</label> <input type="text" class="form-control"
+						aria-label="Quantia" th:field="*{meta.valorDaMeta}" id="demo4"
+						data-thousands="." data-decimal=",">
+				</div>
+			</div>
+
 			<div style="text-align: center">
 				<button type="submit" class="btn btn-primary">Cadastrar</button>
 			</div>

@@ -1,0 +1,19 @@
+<div th:if="${alerta} != null">
+	<div class="alert alert-danger" role="alert">
+	<strong th:text="${alerta}"></strong>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>
+
+<div th:if="${mensagemLogout} != null">
+	<div class="alert alert-success" role="alert">
+	<strong th:text="${mensagemLogout}"></strong>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>

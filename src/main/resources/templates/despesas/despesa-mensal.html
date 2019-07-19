@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Informe suas despesas mensais</h1>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<form th:action="@{/salvarDespesa}" th:object="${despesasMensais}"
+				method="POST" class="form-vertical  js-form-loading">
+
+
+				<div layout:insert="/mensagens/validacao"></div>
+				<div layout:insert="/mensagens/alertas"></div>
+
+
+				<input type="hidden" th:field="*{id}" />
+
+				<div class="form-row">
+					<div class="form-group">
+						<div class="form-group col-md-6"
+							th:classappend="${#fields.hasErrors('valor')} ? has-error">
+							<label class="control-label" for="input-produto-descricao">Valor:</label>
+							<input type="text" class="form-control" aria-label="Quantia"
+								th:field="*{valor}" id="demo4" data-thousands="."
+								data-decimal=",">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-group col-md-6"
+							th:classappend="${#fields.hasErrors('categoriaDaDespesa')} ? has-error">
+							<label class="control-label" for="inputEstado">Categoria
+								da Despesa</label> <select id="inputEstado" class="form-control"
+								th:field="*{categoriaDaDespesa}">
+								<option value="" selected="selected">Categoria</option>
+								<option th:each="categoria : ${categoriasDeDespesas}"
+									th:value="${categoria}" th:text="${categoria.descricao}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group col-md-12" th:if="${id} != null">
+					<label for="input-produto-descricao">Marque caso realizou o pagamento desta despesa: </label> <input size="10px"
+						id="input-produto-descricao" th:field="*{inativa}"
+						th:value="${pendente}" type="checkbox" th:name="my-checkbox"
+						data-on-text="Pendente" data-off-text="Paga" checked>
+
+				</div>
+
+				<div class="form-group col-md-12"
+					th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+					<label class="control-label" for="input-produto-descricao">Descrição:</label>
+					<label for="desc"></label>
+					<textarea class="form-control"
+						placeholder="Entre com a descrição da despesa" id="desc" rows="3"
+						aria-label="Exemplo do tamanho do input"
+						aria-describedby="inputGroup-sizing-default"
+						th:field="*{descricao}"></textarea>
+				</div>
+
+
+
+				<div class="form-group col-md-6">
+					<button type="submit" class="btn btn-primary">Registrar</button>
+
+					<a class="btn btn-primary" role="button" href="/despesasMensais">Ver
+						a lista</a>
+				</div>
+
+			</form>
+		</div>
+
+	</section>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Despesas Mensais</h1>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-usd fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(somaDasDespesasMensais, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Despesas Mensais:</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-tag fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							<span th:text="${quantidadeDeDespesasMensais}"></span>
+						</div>
+						<div class="aw-box__title">Quantidade:</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<form th:action="@{/procurarDespesaPorDescricao}">
+
+			<div class="container">
+
+				<div class="form-group">
+					<div class="form-group col-md-12">
+						<label class="control-label" for="input-produto-descricao">Faça sua busca:</label>
+						<input type="text" class="form-control" th:name="descricao" placeholder="Qual despesa você procura?">
+					</div>
+				</div>
+
+
+			</div>
+
+		</form>
+
+		<div class="container">
+			<table class="table table-hover estiloTopoTabela">
+				<thead>
+					<tr>
+						<th scope="col">Código</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Descrição</th>
+						<th scope="col">Ativa</th>
+						<th scope="col">Categoria</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="d : ${despesas}">
+						<td th:text="${d.id}"></td>
+						<td
+							th:text="${#numbers.formatDecimal(d.valor, 1, 'DEFAULT', 2, 'DEFAULT')}">Mark</td>
+
+						<td th:text="${d.descricao}"></td>
+
+						<td th:if="${d.inativa} == false"><img
+							src="/imagens/paga.png" class="estiloIconesDaTabela"></td>
+
+
+						<td th:if="${d.inativa} == true"><img
+							src="/imagens/pendente2.png" class="estiloIconesDaTabela"></td>
+
+						<td th:text="${d.categoriaDaDespesa.descricao}">Mark</td>
+
+
+						<td><a th:href="@{/editarDespesa{id} (id = ${d.id})}"
+							data-toggle="tooltip" data-placement="top"><i
+								class="fa fa-pencil-square-o" aria-hidden="true"></i></a> &nbsp;
+							&nbsp; &nbsp; <a th:href="@{/excluirDespesa/{id} (id = ${d.id})}"
+							data-toggle="tooltip" data-placement="top"><i
+								class="fa fa-trash-o" aria-hidden="true"></i> </a></td>
+
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+	</section>
+
+</body>
+</html>

@@ -2,10 +2,13 @@ package com.appvendas.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CNPJ;
@@ -13,11 +16,12 @@ import com.appvendas.model.enums.TipoDoEmpreendimento;
 
 
 @SuppressWarnings("serial")
+@Entity
 public class Empreendimento extends AbstractEntity<Long> {
 
 	@Column()
 	@NotBlank(message = "Campo CNPJ não pode ser nulo")
-	@CNPJ(message = "Verifique seu CNPJ")
+	@CNPJ(message = "CNPJ deve ser válido")
 	private String cnpj;
 	
 	@Column(name = "nome_fantasia")
@@ -29,12 +33,16 @@ public class Empreendimento extends AbstractEntity<Long> {
 	@NotNull(message = "Campo Tipo do Empreendimento não pode ser nulo")
 	private TipoDoEmpreendimento tipoDoEmpreendimento;
 	
-	@Column
-	@NotNull(message = "Campo Acesso não pode ser nulo")
+
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "acesso_id", referencedColumnName = "id", nullable = false)
+	@NotNull
 	private Acesso acesso;
 	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "meta", referencedColumnName = "id")
+	private MetaDeVendaMensal meta;
+
 	
 	public Acesso getAcesso() {
 		return acesso;
@@ -66,5 +74,14 @@ public class Empreendimento extends AbstractEntity<Long> {
 
 	public void setTipoDoEmpreendimento(TipoDoEmpreendimento tipoDoEmpreendimento) {
 		this.tipoDoEmpreendimento = tipoDoEmpreendimento;
+	}
+
+	public MetaDeVendaMensal getMeta() {
+		return meta;
+	}
+
+	public void setMeta(MetaDeVendaMensal meta) {
+		this.meta = meta;
 	}	
+	
 }

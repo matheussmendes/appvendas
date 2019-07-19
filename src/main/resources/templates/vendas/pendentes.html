@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Vendas/Serviços Pendentes</h1>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-sm-6">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-usd  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(somaDasVendasPendentes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Total:</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6">
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-tag  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							<span th:text="${quantidadeDeVendasPendentes}"></span>
+						</div>
+						<div class="aw-box__title">Vendas/Serviços pendentes:</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Descrição</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Data</th>
+						<th scope="col">Venda ou serviço pago?</th>
+						<th scope="col">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="v : ${vendas}">
+						<td th:text="${v.id}"></td>
+						<td th:text="${v.descricao}">Mark</td>
+						<td
+							th:text="${#numbers.formatDecimal(v.valor, 1, 'DEFAULT', 2, 'DEFAULT')}">Mark</td>
+						<td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}"></td>
+						<td th:if="${v.pendente} == false"><img
+							src="/imagens/paga.png" class="estiloIconesDaTabela"></td>
+						<td th:if="${v.pendente} == true"><img
+							src="/imagens/pendente2.png" class="estiloIconesDaTabela"></td>
+						<td><a th:href="@{/{id} (id = ${v.id})}"
+							data-toggle="tooltip" data-placement="top"><i
+								class="fa fa-pencil-square-o" aria-hidden="true"></i></a> &nbsp;
+							&nbsp; &nbsp; <a th:href="@{/deletar/{id} (id = ${v.id})}"
+							data-toggle="tooltip" data-placement="top"><i
+								class="fa fa-trash-o" aria-hidden="true"></i> </a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<aside class="aw-layout-sidebar  js-sidebar">
+
+	<div class="aw-layout-sidebar__content">
+
+		<nav class="aw-menu  js-menu">
+
+			<ul class="aw-menu__list">
+
+				<li class="aw-menu__item  is-active"><a href="/painel"> <i
+						class="fa fa-line-chart"></i> <span>Dashboard</span>
+				</a></li>
+
+				<li class="aw-menu__item "><a href="#"> <i
+						class="fa fa-shopping-cart"></i> <span>Vendas ou Serviços</span> <i
+						class="aw-menu__navigation-icon  fa"></i>
+				</a>
+
+					<ul class="aw-menu__list  aw-menu__list--sublist">
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="/formulario">Registrar Receita</a></li>
+						<li class="aw-menu__item  aw-menu__item--link "><a
+							href="/lista">Vendas/serviços</a></li>
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="/vendasPendentes">A Receber</a></li>
+					</ul></li>
+
+				<li class="aw-menu__item"><a href="#"> <i class="fa fa-usd"></i>
+						<span>Despesas</span> <i class="aw-menu__navigation-icon  fa"></i>
+				</a>
+
+					<ul class="aw-menu__list  aw-menu__list--sublist">
+
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="/despesa">Cadastrar Despesas</a></li>
+
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="/despesasMensais">Despesas</a></li>
+
+					</ul></li>
+
+
+
+				<li class="aw-menu__item"><a href="#"> <i
+						class="fa fa-child"></i> <span>Funcionários</span> <i
+						class="aw-menu__navigation-icon  fa"></i>
+				</a>
+
+					<ul class="aw-menu__list  aw-menu__list--sublist">
+
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="pagina-vazia.html">Cadastrar Funcionário</a></li>
+
+						<li class="aw-menu__item  aw-menu__item--link"><a
+							href="login.html">Funcionários</a></li>
+
+					</ul></li>
+
+				<li class="aw-menu__item" th:if="${existeVendaPendente}"><a
+					href="/vendasPendentes"> <i class="fa fa-bell"></i> <span>Notificações</span>
+				</a></li>
+
+			</ul>
+		</nav>
+
+	</div>
+</aside>
+</html>

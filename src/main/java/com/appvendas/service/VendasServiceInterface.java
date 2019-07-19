@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import com.appvendas.model.Vendas;
 
@@ -19,6 +22,8 @@ public interface VendasServiceInterface {
 
 	List<Vendas> listarTodasAsVendas();
 
+	 Page<Vendas> findAll(Pageable pageable);
+	  
 	Optional<Vendas> buscarPorVenda(Long id);
 
 	// implementações específicas
@@ -43,5 +48,7 @@ public interface VendasServiceInterface {
 
 	List<Vendas> pesquisarVendasPorDatas(LocalDate dataInicio, LocalDate dataFim);
 
-
+	double retornarValorLiquidoDoMes();
+	
+	List<Vendas> procurarVendasPorCodigo(Long codigo);
 }

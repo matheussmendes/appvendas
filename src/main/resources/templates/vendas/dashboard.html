@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Informações Gerenciais</h1>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<div class="row">
+				<div class="col-sm-4">
+
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-usd  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(somaDasVendasDiaria, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Hoje:</div>
+					</div>
+
+				</div>
+
+				<div class="col-sm-4">
+
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-usd  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(somaDasVendasDoMes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Este Mês</div>
+					</div>
+
+				</div>
+
+
+				<div class="col-sm-4">
+
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-money  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(valorLiquidoDoMes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Líquido deste Mês</div>
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<div class="row">
+
+				<div class="col-sm-6">
+
+					<div class="aw-box">
+						<div class="aw-box__icon">
+							<i class="fa  fa-bar-chart  fa-3x"></i>
+						</div>
+						<div class="aw-box__value">
+							R$: <span
+								th:text="${#numbers.formatDecimal(somaDasVendasDoAno, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						</div>
+						<div class="aw-box__title">Neste Ano:</div>
+					</div>
+
+				</div>
+				<a href="/vendasPendentes">
+					<div class="col-sm-6">
+
+						<div class="aw-box">
+							<div class="aw-box__icon">
+								<i class="fa  fa-bell  fa-3x"></i>
+							</div>
+							<div class="aw-box__value">
+								R$: <span
+									th:text="${#numbers.formatDecimal(somaDasVendasPendentes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+							</div>
+							<div class="aw-box__title">Vendas/Serviços a receber:</div>
+						</div>
+
+					</div>
+				</a>
+			</div>
+
+			????<span th:text="${user}"></span>
+			
+			
+			<div class="progress">
+				<div class="progress-bar" role="progressbar"
+					aria-valuenow="${somaDasVendasDiaria}" aria-valuemin="0"
+					aria-valuemax=""></div>
+			</div>
+
+
+		</div>
+
+	</section>
+
+
+
+</body>
+</html>

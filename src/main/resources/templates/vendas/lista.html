@@ -62,11 +62,15 @@
 						src="/imagens/paga.png" class="estiloIconesDaTabela"></td>
 					<td th:if="${v.pendente} == true"><img
 						src="/imagens/pendente2.png" class="estiloIconesDaTabela"></td>
-					<td><a th:href="@{/{id} (id = ${v.id})}"><img
-							src="/imagens/editar.png" class="estiloIconesDaTabela" /></a> &nbsp;
-						&nbsp; &nbsp; <a th:href="@{/deletar/{id} (id = ${v.id})}"><img
-							src="/imagens/excluir.png" class="estiloIconesDaTabela"
-							data-toggle="modal" data-target="#ExemploModalCentralizado" /> </a></td>
+					<td><a th:href="@{/{id} (id = ${v.id})}" data-toggle="tooltip"
+						data-placement="top"><img src="/imagens/editar.png"
+							class="estiloIconesDaTabela" /></a> &nbsp; &nbsp; &nbsp; 
+							
+							<a
+						th:href="@{/deletar/{id} (id = ${v.id})}" data-toggle="tooltip"
+						data-placement="top"><img src="/imagens/excluir.png"
+							class="estiloIconesDaTabela" data-toggle="modal"
+							data-target="#ExemploModalCentralizado" /> </a></td>
 				</tr>
 			</tbody>
 		</table>

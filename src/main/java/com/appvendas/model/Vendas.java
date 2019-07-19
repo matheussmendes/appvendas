@@ -1,7 +1,10 @@
 package com.appvendas.model;
 import java.time.LocalDate;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
@@ -32,6 +35,10 @@ public class Vendas extends AbstractEntity<Long>{
 	@Column
 	private boolean pendente;
 
+	@ManyToOne()
+	@JoinColumn(name = "id_empresa", referencedColumnName = "id")
+	private Empreendimento idDoEmpreendimento;
+	
 	
 	public String getDescricao() {
 		return descricao;

@@ -6,25 +6,35 @@
 <nav class="nav flex-column">
 
 	<a class="nav-link active" href="/painel"><img
-		src="imagens/grafico.png" class="estiloIconeMenu" />Dashboard</a>
-		 <a
-		 
+		src="imagens/grafico.png" class="estiloIconeMenu" />Dashboard</a> 
+		
+		<a
 		class="nav-link" href="/formulario"><img src="imagens/vendas.png"
-		class="estiloIconeMenu" />Efetuar Venda</a> 
+		class="estiloIconeMenu" />Registrar Receita</a>
+		
+		 <a class="nav-link"
+		href="/lista"><img src="imagens/saidas.png"
+		class="estiloIconeMenu" />Vendas/Serviços</a> 
+		
 		<a class="nav-link"
+		href="/vendasPendentes"><img src="imagens/areceber.png"
+		class="estiloIconeMenu" />A Receber</a> 
 		
+		<a class="nav-link"
+		href="/despesa"><img src="imagens/contas.png"
+		class="estiloIconeMenu" />Registrar Despesa</a> 
+		
+		<a class="nav-link"
+		href="/despesasMensais"><img src="imagens/aPagar.png"
+		class="estiloIconeMenu" />Despesas Mensais</a> 
+		
+		<a class="nav-link"
+		href="/vendasPendentes"><img src="imagens/funcionarios.png"
+		class="estiloIconeMenu" />Funcionários</a> 
+		
+		<a class="nav-link"
 		href="/formulario"><img src="imagens/relatorios.png"
-		class="estiloIconeMenu"/>Relatórios</a> 
-		
-		<a class="nav-link" href="/lista"><img
-		src="imagens/saidas.png" class="estiloIconeMenu" />Vendas Realizadas</a>
-
-	<a class="nav-link" href="/vendasPendentes"><img
-		src="imagens/areceber.png" class="estiloIconeMenu" />Vendas a Receber</a>
-
-	<a th:if="${existeVendaPendente} == false" class="nav-link"
-		href="/lista"><img src="imagens/notificacao.png"
-		class="estiloIconeMenu" />Notificações</a>
+		class="estiloIconeMenu" />Relatórios</a>
 		
 		 <a
 		th:if="${existeVendaPendente} == true" class="nav-link"

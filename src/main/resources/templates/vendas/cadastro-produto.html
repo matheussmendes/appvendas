@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Registre sua venda/serviço prestado</h1>
+			</div>
+		</div>
+
+
+		<div class="container">
+
+			<form th:action="@{/salvar}" th:object="${vendas}" method="POST"
+				class="form-vertical  js-form-loading">
+
+				<input type="hidden" th:field="*{id}">
+
+				<div layout:insert="/mensagens/alertas"></div>
+				<div layout:insert="/mensagens/validacao"></div>
+
+				<div class="form-group col-md-3"
+					th:classappend="${#fields.hasErrors('valor')} ? has-error">
+					<label for="descricao" class="control-label">Valor:</label> <input
+						type="text" class="form-control" aria-label="Quantia"
+						th:field="*{valor}" id="demo4" data-thousands="." data-decimal=",">
+				</div>
+
+
+				<div class="form-group col-md-12"
+					th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="input-produto-descricao" class="control-label">Descrição:</label>
+					<textarea id="input-produto-descricao" rows="3"
+						th:field="*{descricao}" class="form-control"></textarea>
+				</div>
+
+				<div class="form-group col-md-6" th:if="${id} != null">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="inputGroup-sizing-default">Data</span>
+					</div>
+					<input type="text" class="form-control"
+						aria-label="Exemplo do tamanho do input"
+						aria-describedby="inputGroup-sizing-default" th:field="*{data}"
+						data-provide="datepicker" data-date-format="dd/mm/yyyy"
+						data-date-language="pt-BR" data-date-autoclose="true"
+						data-date-today-highlight="true">
+				</div>
+
+				<div class="form-group col-md-12">
+					<label for="input-produto-descricao">Marque caso não recebeu essa venda/serviço: </label> <input size="10px"
+						id="input-produto-descricao" th:field="*{pendente}"
+						th:value="${pendente}" type="checkbox" th:name="my-checkbox"
+						data-on-text="Pendente" data-off-text="Paga" checked>
+
+				</div>
+
+				<div class="form-group col-md-6">
+					<button class="btn  btn-primary" type="submit">Registrar</button>
+
+					<a class="btn btn-primary" role="button" href="/lista">Ver a
+						lista</a>
+				</div>
+
+			</form>
+		</div>
+
+	</section>
+
+	<script>
+		$("[name='my-checkbox']").bootstrapSwitch();
+	</script>
+
+</body>
+</html>

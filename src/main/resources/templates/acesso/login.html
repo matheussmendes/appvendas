@@ -20,29 +20,31 @@
 </head>
 
 <body class="estiloCorpo">
-	
-		<header layout:insert="/fragmentos/cabecalhoLogin"
-			class="estiloDoCabecalho"> </header>
 
-		<div layout:fragment="conteudo"></div>
+	<header layout:insert="/fragmentos/cabecalhoLogin"
+		class="estiloDoCabecalho"> </header>
 
-
-		<footer layout:insert="/fragmentos/rodape"> </footer>
+	<div layout:fragment="conteudo"></div>
 
 
-		<script>
-			$(function() {
-				$('[data-toggle="tooltip"]').tooltip()
-			});
-		</script>
+	<footer layout:insert="/fragmentos/rodape"> </footer>
 
-		<script src="/js/jquery"></script>
-		<script src="/js/bootstrap-datepicker.js"></script>
-		<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
-		<script src="/js/popper.js"></script>
 
-		<script src="/js/bootstrap.js"></script>
+	<script>
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
 
+	<script src="/js/jquery"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
+	<script src="/js/popper.js"></script>
+
+	<script src="/js/bootstrap.js"></script>
+	<script>
+		$("#demo4").maskMoney();
+	</script>
 
 </body>
 </html>

@@ -7,20 +7,15 @@
 <section layout:fragment="conteudo">
 	<div class="container">
 
-		<div class="shadow p-3 mb-5 bg-white rounded">
-			<h6 class="text-primary">Aqui você tem acesso a suas vendas ou
-				prestação de serviços de modo completo e diversificado</h6>
-		</div>
-
 		<div class="row">
 
 			<div class="col-sm-3">
 				<div class="card text-white bg-primary mb-3"
 					style="max-width: 18rem;">
 					<div class="card-body">
-						<h5 class="card-title">Vendas Hoje:</h5>
+						<h5 class="card-title">Hoje:</h5>
 						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /><span
-							th:text="${somaDasVendasDiaria}"></span>
+							th:text="${#numbers.formatDecimal(somaDasVendasDiaria, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
 					</div>
 				</div>
 
@@ -29,21 +24,9 @@
 			<div class="col-sm-3">
 				<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
 					<div class="card-body">
-						<h5 class="card-title">Vendas deste Mês</h5>
+						<h5 class="card-title">Neste Mês</h5>
 						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /><span
-							th:text="${somaDasVendasDoMes}"></span>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col-sm-3">
-				<div class="card text-white bg-danger mb-3"
-					style="max-width: 18rem;">
-					<div class="card-body">
-						<h5 class="card-title">Vendas deste Ano:</h5>
-						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /><span
-							th:text="${somaDasVendasDoAno}"></span>
+							th:text="${#numbers.formatDecimal(somaDasVendasDoMes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
 					</div>
 				</div>
 
@@ -53,15 +36,30 @@
 				<div class="card text-white bg-warning mb-3"
 					style="max-width: 18rem;">
 					<div class="card-body">
-						<h5 class="card-title">Quantidade de vendas Hoje:</h5>
-						<span th:text="${quantidadeDeVendasDiarias}"></span>
+						<h5 class="card-title">Líquido deste Mês</h5>
+						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /><span
+							th:text="${#numbers.formatDecimal(valorLiquidoDoMes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
 					</div>
 				</div>
+			</div>
 
+			<div class="col-sm-3">
+				<div class="card text-white bg-danger mb-3"
+					style="max-width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">Neste Ano:</h5>
+						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /><span
+							th:text="${#numbers.formatDecimal(somaDasVendasDoAno, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+					</div>
+				</div>
 			</div>
 
 		</div>
-	</div>
 
+	</div>
+	
+	
 </section>
+
+
 </html>

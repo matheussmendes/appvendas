@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/acesso/login">
+
+
+<div layout:fragment="conteudo">
+
+	<div class="container">
+		<form >
+
+		<div layout:insert="/mensagens/alertas"></div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">E-mail
+					</span>
+				</div>
+				<label for="desc"></label> <input type="email" class="form-control"
+					id="desc" aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default" >
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Senha
+					</span>
+				</div>
+				<label for="desc"></label> <input type="password" 
+					class="form-control" id="desc"
+					aria-label="Exemplo do tamanho do input"
+					aria-describedby="inputGroup-sizing-default">
+			</div>
+
+			<div style="text-align: center">
+				<button type="submit" class="btn btn-primary">Entrar</button>
+			</div>
+
+		</form>
+	</div>
+
+</div>
+</html>

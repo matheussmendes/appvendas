@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>nirvana</title>
+
+<link rel="stylesheet" type="text/css"
+	href="layout/stylesheets/vendors.min.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="layout/stylesheets/algaworks.min.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="layout/stylesheets/application.css" />
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.standalone.css">
+
+<link rel="stylesheet" type="text/css" href="/css/estilo.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="/layout/stylesheets/bootstrap-switch.css" />
+
+</head>
+
+
+<body>
+
+	<header layout:insert="/layout/fragmentos/cabecalho"> </header>
+
+	<div class="row">
+
+		<section style="margin: 80px">
+			<div layout:fragment="principal"></div>
+		</section>
+		<div layout:insert="/layout/fragmentos/rodape"></div>
+
+	</div>
+
+
+	<script src="/js/bootstrap.js"></script>
+
+	<div class="aw-search-modal  js-search-modal">
+
+		<form action="#" class="aw-search-modal__form">
+			<input class="aw-search-modal__input  js-search-modal-input"
+				type="text" placeholder="O que você está procurando?" />
+			<div class="aw-search-modal__input-icon">
+				<i class="glyphicon  glyphicon-search  js-search-modal-go"></i>
+			</div>
+		</form>
+
+		<div class="aw-search-modal__controls">
+			<i class="glyphicon glyphicon-remove  js-search-modal-close"></i>
+		</div>
+	</div>
+
+
+	<script src="layout/javascripts/vendors.min.js"></script>
+	<script src="layout/javascripts/algaworks.min.js"></script>
+	<script src="layout/javascripts/jquery.maskMoney.js"
+		type="text/javascript"></script>
+
+	<script>
+		$("#demo4").maskMoney();
+	</script>
+
+	<script>
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
+
+	<script src="/js/jquery"></script>
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
+	<script src="/js/popper.js"></script>
+	<script src="/layout/javascripts/bootstrap-switch.js"></script>
+	<script>
+		$("[name='my-checkbox']").bootstrapSwitch();
+	</script>
+</body>
+</html>

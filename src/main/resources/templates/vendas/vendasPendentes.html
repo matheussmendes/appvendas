@@ -9,31 +9,29 @@
 <section layout:fragment="conteudo">
 
 	<div class="container">
-		<div class="shadow p-3 mb-5 bg-white rounded">
-			<h6 class="text-primary">Monitore suas Vendas ou Serviços a Receber</h6>
-		</div>
+
 		<div class="row">
-			<div class="col-sm-6">
-				<div class="card text-white bg-danger mb-3"
-					style="max-width: 18rem;">
-					<div class="card-body">
-						<h5 class="card-title">Vendas/Serviços a
-							Receber:</h5>
-						<span th:text="${quantidadeDeVendasPendentes}"></span>
-					</div>
+			<div class="card border-primary mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<h6>Vendas/Serviços Pendentes:</h6>
+				</div>
+				<div class="card-body text-primary">
+					<h5 class="card-title"></h5>
+					<span th:text="${quantidadeDeVendasPendentes}"></span>
 				</div>
 			</div>
 
-			<div class="col-sm-6">
-				<div class="card text-white bg-warning mb-3"
-					style="max-width: 18rem;">
-					<div class="card-body">
-						<h5 class="card-title">Soma das Vendas/Serviços a Receber:</h5>
-						<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /> <span
-							th:text="${somaDasVendasPendentes}"></span>
-					</div>
-				</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+			<div class="card border-primary mb-3" style="max-width: 18rem;">
+				<div class="card-header">
+					<h6>Vendas/Serviços Pendentes:</h6>
+				</div>
+				<div class="card-body text-primary">
+					<h5 class="card-title"></h5>
+					<img src="/imagens/dinheiro2.png" class="estiloIconeMenu" /> <span
+						th:text="${#numbers.formatDecimal(somaDasVendasPendentes, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+				</div>
 			</div>
 		</div>
 
@@ -52,7 +50,8 @@
 				<tr th:each="v : ${vendas}">
 					<td th:text="${v.id}"></td>
 					<td th:text="${v.descricao}">Mark</td>
-					<td th:text="${v.valor}">Mark</td>
+					<td
+						th:text="${#numbers.formatDecimal(v.valor, 1, 'DEFAULT', 2, 'DEFAULT')}">Mark</td>
 					<td th:text="${#temporals.format(v.data, 'dd/MM/yyyy')}">Mark</td>
 					<td><img src="/imagens/pendente2.png"
 						class="estiloIconesDaTabela" /></td>

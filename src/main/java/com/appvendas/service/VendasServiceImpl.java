@@ -5,11 +5,11 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
 import com.appvendas.dao.VendasDaoInterface;
 import com.appvendas.model.Vendas;
 
@@ -19,6 +19,9 @@ public class VendasServiceImpl implements VendasServiceInterface {
 	@Autowired
 	private VendasDaoInterface dao;
 
+	@Autowired
+	private DespesasMensaisServiceImpl serviceDespesa;
+	
 	public static LocalDate CALENDARIO = LocalDate.now();
 	public static LocalDate CALENDARIO_DA_VENDA = LocalDate.now();
 	public static int MES_ATUAL = 1 + CALENDARIO.getMonthValue();
@@ -45,6 +48,7 @@ public class VendasServiceImpl implements VendasServiceInterface {
 	public List<Vendas> listarTodasAsVendas() {
 		return (List<Vendas>) dao.findAll();
 	}
+
 
 	@Override
 	public Optional<Vendas> buscarPorVenda(Long id) {
@@ -202,6 +206,7 @@ public class VendasServiceImpl implements VendasServiceInterface {
 		boolean x = false;
 		int count = 0;
 		for (Vendas v : dao.findAll()) {
+		
 			if (v.isPendente() == true) {
 				count++;
 			}
@@ -241,6 +246,29 @@ public class VendasServiceImpl implements VendasServiceInterface {
 	public boolean isVendaPendente() {
 
 		return false;
+	}
+
+	@Override
+	public double retornarValorLiquidoDoMes() {
+		double valorLiquido = 0.0;	
+		valorLiquido =  retornarVendaMensal() - serviceDespesa.somaDasDespesasMensais();
+		if(valorLiquido <= 0) {
+			return 0.0;
+		}
+		return valorLiquido;
+	}
+
+	@Override
+	public List<Vendas> procurarVendasPorCodigo(Long codigo) {
+		if(codigo == null) {
+			return listarTodasAsVendas();
+		}
+		return dao.procurarVendasPorCodigo(codigo);
+	}
+
+	@Override
+	public Page<Vendas> findAll(org.springframework.data.domain.Pageable pageable) {
+		return dao.findAll(pageable);
 	}
 
 }

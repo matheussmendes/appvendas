@@ -1,5 +1,7 @@
 package com.appvendas.service;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import com.appvendas.model.Empreendimento;
 
@@ -13,5 +15,5 @@ public interface EmpreendimentoServiceInterface {
 	
 	List<Empreendimento> listarTodosOsEmpreendimentos();
 	
-	Empreendimento buscarPorEmpreendimento(Long id);
+	Optional<Empreendimento> buscarPorEmpreendimento(Long id);
 }
