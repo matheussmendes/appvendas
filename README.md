@@ -11,7 +11,7 @@ Sistema Web em Java com Spring - appVendas é um sistema web para donos de peque
 <h3>Sobre</h3>
 
 Sabendo da dificuldade de possuir o controle sobre as entradas e
-				saídas de um negócio, os criadores da plataforma appVendas resolveram
+				saídas de um negócio, o criador da plataforma appVendas resolveu
 				simplificar a maneira de gerenciar essas informações. Foi a partir
 				dessa complexidade de gerir essas informações críticas como depesas,
 				receitas, rentabilidade mensal e quantidade de vendas em aberto que
