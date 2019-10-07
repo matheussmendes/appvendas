@@ -1,5 +1,5 @@
 # appvendas
-Sistema Web em Java com Spring para gestão de rentabilidade para donos de pequenos negócios ou prestadores de serviços
+Sistema Web em Java com Spring - appVendas é um sistema web para donos de pequenos negócios ou prestadores de serviços controlar sua rentabilidade diária, mensal ou anual, bem como ter um maior controle sobre seus custos mensais.
 
 ![home](https://user-images.githubusercontent.com/49170051/66351833-bc67c800-e934-11e9-8923-acca3fe778fc.jpg)
 
