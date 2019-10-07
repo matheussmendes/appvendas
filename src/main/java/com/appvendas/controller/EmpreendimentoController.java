@@ -13,7 +13,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.appvendas.model.Empreendimento;
 import com.appvendas.model.enums.TipoDoEmpreendimento;
 import com.appvendas.service.EmpreendimentoServiceImpl;
-
+import com.appvendas.service.UsuarioServiceImpl;
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 
 @Controller
 public class EmpreendimentoController {
@@ -21,6 +26,8 @@ public class EmpreendimentoController {
 	@Autowired
 	private EmpreendimentoServiceImpl service;
 	
+	@Autowired
+	private UsuarioServiceImpl serviceDoUsuario;
 	
 	@RequestMapping("/cadastrar")
 	public String cadastrarEmpreendimento(Empreendimento empreendimento) {
@@ -43,10 +50,13 @@ public class EmpreendimentoController {
 		return "redirect:/";
 	}
 	
-	
 	@RequestMapping("/acessar")
 	public String exibirPaginaDeAutenticacao() {
 		return "/acesso/logar";
 	}
 	
+
+	public String retornarEmailDaEmpresaLogada() {
+		return serviceDoUsuario.capturarEmailDaEmpresaLogada(serviceDoUsuario.capturarIdDaEmpresaLogada());
+	}
 }

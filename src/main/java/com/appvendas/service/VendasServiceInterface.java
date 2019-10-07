@@ -1,16 +1,20 @@
 package com.appvendas.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
-import com.appvendas.model.Vendas;
 
+import com.appvendas.model.Empreendimento;
+import com.appvendas.model.Vendas;
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Service
 public interface VendasServiceInterface {
 
@@ -22,7 +26,7 @@ public interface VendasServiceInterface {
 
 	List<Vendas> listarTodasAsVendas();
 
-	 Page<Vendas> findAll(Pageable pageable);
+	Page<Vendas> findAll(Pageable pageable);
 	  
 	Optional<Vendas> buscarPorVenda(Long id);
 
@@ -51,4 +55,10 @@ public interface VendasServiceInterface {
 	double retornarValorLiquidoDoMes();
 	
 	List<Vendas> procurarVendasPorCodigo(Long codigo);
+	
+	List<Vendas> listarVendasPorEmpresa(Empreendimento empresa);
+	
+	double retornarValorNecessarioParaAlcancarADespesa();
+
+
 }

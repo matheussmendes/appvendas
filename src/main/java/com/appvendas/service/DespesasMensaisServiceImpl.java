@@ -9,15 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.appvendas.dao.DespesasMensaisDaoInterface;
 import com.appvendas.model.DespesasMensais;
+import com.appvendas.model.Empreendimento;
 import com.appvendas.model.enums.CategoriaDaDespesa;
 
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 
 @Service
 public class DespesasMensaisServiceImpl implements DespesasMensaisServiceInterface {
 
 	@Autowired
 	private DespesasMensaisDaoInterface dao;
+	
+	@Autowired
+	private UsuarioServiceImpl serviceDoAcesso;
 	
 	@Override
 	public void salvar(DespesasMensais contasAPagar) {
@@ -43,17 +51,34 @@ public class DespesasMensaisServiceImpl implements DespesasMensaisServiceInterfa
 	public double somaDasDespesasMensais() {	
 		double soma = 0.0;
 		for(DespesasMensais d : dao.findAll()) {
-			if(d.isInativa() == false) {
+			if(retornarValidacaoDaSomaDasDespesasMensais(d.isInativa(), d.getIdEmpreendimento().getId())) {
 				soma += d.getValor();
 			}
 		}		
 		System.out.println("SOMA DAS DESPESAS" +soma);
 		return soma;
 	}
+	
+	public boolean retornarValidacaoDaSomaDasDespesasMensais(boolean inativa, long id) {
+		return !inativa && id == serviceDoAcesso.capturarIdDaEmpresaLogada();
+	}
+	
+	
 
 	@Override
 	public Long quantidadeDeDespesasMensais() {
 		return dao.count();
+	}
+	
+
+	@Override
+	public Long retornarQuantidadeDeDespesaPorEmpreendimento(Empreendimento empresa) {
+		return dao.countByIdEmpreendimento(empresa);
+	}
+	
+	
+	public boolean retornarValidacaoDeQuantidadeDeDespesasMensais(long id) {
+		return id == serviceDoAcesso.capturarIdDaEmpresaLogada();
 	}
 
 	@Override
@@ -73,4 +98,11 @@ public class DespesasMensaisServiceImpl implements DespesasMensaisServiceInterfa
 		
 		return dao.findByDescricaoContaining(descricao);
 	}
+
+	@Override
+	public List<DespesasMensais> listarDespesaPorEmpreendimento(Empreendimento empresa) {
+		return dao.findByidEmpreendimento(empresa);
+	}
+
+
 }

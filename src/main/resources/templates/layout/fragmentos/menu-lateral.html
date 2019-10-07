@@ -11,11 +11,12 @@
 			<ul class="aw-menu__list">
 
 				<li class="aw-menu__item  is-active"><a href="/painel"> <i
-						class="fa fa-line-chart"></i> <span>Dashboard</span>
+						class="fa fa-line-chart"></i> <span>DASHBOARD</span> <i
+						class="aw-menu__navigation-icon  fa"></i>
 				</a></li>
 
 				<li class="aw-menu__item "><a href="#"> <i
-						class="fa fa-shopping-cart"></i> <span>Vendas ou Serviços</span> <i
+						class="fa fa-shopping-cart"></i> <span>VENDAS/SERVIÇOS</span> <i
 						class="aw-menu__navigation-icon  fa"></i>
 				</a>
 
@@ -28,8 +29,9 @@
 							href="/vendasPendentes">A Receber</a></li>
 					</ul></li>
 
+
 				<li class="aw-menu__item"><a href="#"> <i class="fa fa-usd"></i>
-						<span>Despesas</span> <i class="aw-menu__navigation-icon  fa"></i>
+						<span>DESPESAS</span> <i class="aw-menu__navigation-icon  fa"></i>
 				</a>
 
 					<ul class="aw-menu__list  aw-menu__list--sublist">
@@ -43,25 +45,10 @@
 					</ul></li>
 
 
-
-				<li class="aw-menu__item"><a href="#"> <i
-						class="fa fa-child"></i> <span>Funcionários</span> <i
-						class="aw-menu__navigation-icon  fa"></i>
-				</a>
-
-					<ul class="aw-menu__list  aw-menu__list--sublist">
-
-						<li class="aw-menu__item  aw-menu__item--link"><a
-							href="pagina-vazia.html">Cadastrar Funcionário</a></li>
-
-						<li class="aw-menu__item  aw-menu__item--link"><a
-							href="login.html">Funcionários</a></li>
-
-					</ul></li>
-
 				<li class="aw-menu__item" th:if="${existeVendaPendente}"><a
-					href="/vendasPendentes"> <i class="fa fa-bell"></i> <span>Notificações</span>
+					href="/vendasPendentes"> <i class="fa fa-bell"></i> <span>NOTIFICAÇÕES</span>
 				</a></li>
+
 
 			</ul>
 		</nav>

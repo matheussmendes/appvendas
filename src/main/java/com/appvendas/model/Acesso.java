@@ -3,7 +3,11 @@ package com.appvendas.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @SuppressWarnings("serial")
 @Entity
 public class Acesso extends AbstractEntity<Long>{

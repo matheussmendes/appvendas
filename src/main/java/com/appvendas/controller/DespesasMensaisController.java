@@ -10,17 +10,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.appvendas.model.DespesasMensais;
+import com.appvendas.model.Empreendimento;
 import com.appvendas.model.enums.CategoriaDaDespesa;
 import com.appvendas.service.DespesasMensaisServiceImpl;
-
+import com.appvendas.service.UsuarioServiceImpl;
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Controller
 public class DespesasMensaisController {
 
 	@Autowired
 	private DespesasMensaisServiceImpl service;
 
+	@Autowired
+	private UsuarioServiceImpl serviceAcesso;
+	
+	
 	@RequestMapping("/despesa")
 	public String cadastrarDespesa(DespesasMensais despesasMensais) {
 		return "/despesas/despesa-mensal";
@@ -32,19 +41,26 @@ public class DespesasMensaisController {
 	}
 
 	@RequestMapping("/salvarDespesa")
-	public String salvar(@Valid DespesasMensais contasAPagar, BindingResult result, RedirectAttributes ra) {
+	public String salvar(@Valid DespesasMensais despesa, BindingResult result, RedirectAttributes ra) {
 
 		if (result.hasErrors()) {
 			return "/despesas/despesa-mensal";
 		}
-		service.salvar(contasAPagar);
+		
+		vincularEmpresaLogadaComRegistroDeDespesa(despesa);
+		
+		service.salvar(despesa);
 		ra.addFlashAttribute("mensagemDeSucesso", "Despesa registrada com sucesso!!!");
 		return "redirect:/despesa";
 	}
 
 	@RequestMapping("/despesasMensais")
 	public String listarDespesasMensais(ModelMap model) {
-		model.addAttribute("despesas", service.listarTodasAsDespesasMensais());
+		Empreendimento empresa = new Empreendimento();
+		
+		empresa.setId(serviceAcesso.capturarIdDaEmpresaLogada());
+		
+		model.addAttribute("despesas", service.listarDespesaPorEmpreendimento(empresa));
 		return "/despesas/despesas";
 	}
 
@@ -67,7 +83,9 @@ public class DespesasMensaisController {
 
 	@ModelAttribute("quantidadeDeDespesasMensais")
 	public Long exibirQuantidadeDeDespesasMensais() {
-		return service.quantidadeDeDespesasMensais();
+		Empreendimento empresa = new Empreendimento();	
+		empresa.setId(serviceAcesso.capturarIdDaEmpresaLogada());
+		return service.retornarQuantidadeDeDespesaPorEmpreendimento(empresa);
 	}
 
 	@RequestMapping("/selecionarParaModal{id}")
@@ -91,5 +109,20 @@ public class DespesasMensaisController {
 		model.addAttribute("despesas", service.procurarDespesasMensaisPorDescricao(descricao));
 		return "/despesas/despesas";
 	}
+	
+	public void vincularEmpresaLogadaComRegistroDeDespesa(DespesasMensais despesa) {
+		/*instanciei um empreendimento, passo o id do empreendimento logado como o id desse novo objeto empreendimento, 
+		posteriormente passo esse empreendimento para a despesa*/
+		
+		Empreendimento empresa = new Empreendimento();
+		empresa.setId(serviceAcesso.capturarIdDaEmpresaLogada());
+		despesa.setIdEmpreendimento(empresa);
+	}
+	
+
+	@ModelAttribute("nomeEmpresaLogada") 
+	 public  String exibeNomeDaEmpresaLogada(){
+		 return serviceAcesso.capturarNomeDaEmpresaLogada(serviceAcesso.capturarIdDaEmpresaLogada()); 
+	 }
 
 }

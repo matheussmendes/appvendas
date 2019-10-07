@@ -2,16 +2,11 @@ package com.appvendas.controller;
 
 import java.time.LocalDate;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.appvendas.dao.MetaMensalDaoInterface;
-import com.appvendas.model.Acesso;
-import com.appvendas.model.MetaDeVendaMensal;
+import com.appvendas.model.Empreendimento;
 import com.appvendas.model.Vendas;
+import com.appvendas.service.DespesasMensaisServiceImpl;
+import com.appvendas.service.MetaMensalServiceImpl;
 import com.appvendas.service.UsuarioServiceImpl;
 import com.appvendas.service.VendasServiceImpl;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Controller
 public class VendasController {
 
@@ -36,22 +35,39 @@ public class VendasController {
 	private VendasServiceImpl service;
 
 	@Autowired
-	private UsuarioServiceImpl serviceDoAcesso;
+	private EmailController controllerDoEmail;
 	
+	@Autowired
+	private DespesasMensaisServiceImpl serviceDeDespesa;
+
+	@Autowired
+	private UsuarioServiceImpl serviceDoAcesso;
+
+	@Autowired
+	private MetaMensalServiceImpl serviceDaMeta;
+
 	@RequestMapping("/formulario")
 	public String formulario(Vendas vendas) {
 		return "/vendas/cadastro-produto";
 	}
 
 	@RequestMapping(path = "/lista")
-	public String listar(ModelMap model, @PageableDefault(size = 2) Pageable pageable) {
-		model.addAttribute("vendas", service.findAll(pageable));
+	public String listar(ModelMap model/* , @PageableDefault(size = 2) Pageable pageable */) {
+
+		Empreendimento empresa = new Empreendimento();
+
+		empresa.setId(serviceDoAcesso.capturarIdDaEmpresaLogada());
+
+		model.addAttribute("vendas", service.listarVendasPorEmpresa(empresa));
+
 		return "/vendas/vendas-servicos";
 	}
 
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST)
 	public String salvar(@Valid Vendas vendas, BindingResult result, RedirectAttributes ra) {
 		LocalDate agora = LocalDate.now();
+		vincularEmpresaLogadaComRegistroDeReceita(vendas);
+
 		if (ehCadastroNovo(vendas, result, ra)) {
 			vendas.setData(agora);
 			service.salvar(vendas);
@@ -82,12 +98,13 @@ public class VendasController {
 
 	@RequestMapping("/painel")
 	public String exibirPainel(Vendas vendas) {
-		
-	/*Por meio da classe 'SecurityContextHolder' capturo o e-mail da empresa logada. Após isso
-	  consigo capturar, por meio de um método próprio, o id da empresa do respectivo e-mail.*/;
-		
-		System.out.println("CAPTURADO:::::" +serviceDoAcesso.capturarIdDaEmpresaLogada());
-		
+
+		/*
+		 * Por meio da classe 'SecurityContextHolder' capturo o e-mail da empresa
+		 * logada. Após isso consigo capturar, por meio de um método próprio, o id da
+		 * empresa do respectivo e-mail.
+		 */;
+
 		return "/vendas/dashboard";
 	}
 
@@ -167,6 +184,14 @@ public class VendasController {
 
 	@ModelAttribute("valorLiquidoDoMes")
 	public double retornarValorLiquidoDoMes() {
+		/*Neste código posso implementar a verificação de caso o valor líquido mensal seja maior que 0, 
+		 * significa que já comecei a ter rentabilidade, podendo inserir o método de envio de e-mail.
+		 * */
+		double valorLiquidoDoMes = service.retornarValorLiquidoDoMes();
+	
+		if(valorLiquidoDoMes > 0 && controllerDoEmail.emailEnviado == false) {
+			//controllerDoEmail.enviarEmail();
+		}
 		return service.retornarValorLiquidoDoMes();
 	}
 
@@ -174,6 +199,37 @@ public class VendasController {
 	public String procurarVendaPorCodigo(@RequestParam("codigo") Long codigo, ModelMap model) {
 		model.addAttribute("vendas", service.procurarVendasPorCodigo(codigo));
 		return "/vendas/vendas-servicos";
+	}
+
+	public void vincularEmpresaLogadaComRegistroDeReceita(Vendas vendas) {
+		/*
+		 * instanciei um empreendimento, passo o id do empreendimento logado como o id
+		 * desse novo objeto empreendimento, posteriormente passo esse empreendimento
+		 * para a venda
+		 */
+		Empreendimento empresa = new Empreendimento();
+		empresa.setId(serviceDoAcesso.capturarIdDaEmpresaLogada());
+		vendas.setIdDoEmpreendimento(empresa);
+	}
+
+	@ModelAttribute("nomeEmpresaLogada")
+	public String exibeNomeDaEmpresaLogada() {
+		return serviceDoAcesso.capturarNomeDaEmpresaLogada(serviceDoAcesso.capturarIdDaEmpresaLogada());
+	}
+
+	@ModelAttribute("valorParaAlcancarDespesa")
+	public double retornarValorNecessarioParaAlcancarDespesa() {
+		return service.retornarValorNecessarioParaAlcancarADespesa();
+	}
+
+	@ModelAttribute("somaDasDespesasMensais")
+	public double retornarSomaDasDespesasMensais() {
+		return serviceDeDespesa.somaDasDespesasMensais();
+	}
+
+	@ModelAttribute("valorDaMeta")
+	public double retornarValorDaMeta() {
+		return serviceDaMeta.retornarValorDaMetaPorEmpreendimento(serviceDoAcesso.capturarIdDaEmpresaLogada());
 	}
 
 }

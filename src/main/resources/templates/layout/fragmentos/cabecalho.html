@@ -10,8 +10,12 @@
 		<div class="navbar-header">
 			<a class="navbar-brand  hidden-xs" href="/painel"
 				data-toggle="tooltip" data-placement="right"
-				title="Deixe nirvana te ajudar a gerenciar seu faturamento e suas despesas">
-				nirvana </a>
+				title="Deixe appVendas te ajudar a gerenciar seu faturamento e suas despesas">
+				appVendas </a> 
+				
+			<a href="/painel"><img src="/imagens/husk.png"
+				class="estiloIconeLoginCadastrar" data-toggle="tooltip" data-placement="right"
+				title="Ir para a página principal"/></a>
 
 			<ul class="nav  navbar-nav">
 				<li><a href="#" class="js-sidebar-toggle" data-toggle="tooltip"
@@ -22,13 +26,12 @@
 
 
 		<ul class="nav navbar-nav  navbar-right">
-			<li><p class="navbar-text">Logado como:</p> <span
-				class="navbar-text" sec:authentication="name"></span></li>
-			
+			<li><p class="navbar-text">Bem vindo (a), </p> <span
+				class="navbar-text" th:text="${nomeEmpresaLogada}"></span></li>
 			<li><form th:action="@{/logout}" method="post">
 					<button class="btn btn btn-link " type="submit">
-						<em class="fa  fa-sign-out" data-toggle="tooltip"
-							data-placement="left" title="Sair"></em>
+						<div class="estiloBotaoSair"><em class="fa  fa-sign-out" data-toggle="tooltip"
+							data-placement="left" title="Sair"></em></div>
 					</button>
 				</form></li>
 		</ul>

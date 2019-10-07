@@ -100,21 +100,35 @@
 				</a>
 			</div>
 
-			????<span th:text="${user}"></span>
-			
-			
-			<div class="progress">
-				<div class="progress-bar" role="progressbar"
-					aria-valuenow="${somaDasVendasDiaria}" aria-valuemin="0"
-					aria-valuemax=""></div>
+			<div class="estiloInformacoesDeGerencia"
+				th:if="${valorParaAlcancarDespesa} > 0">
+				<h4>
+					<span th:text="${nomeEmpresaLogada}"></span>, falta R$ <span
+						th:text="${#numbers.formatDecimal(valorParaAlcancarDespesa, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+						para você começar a ter rentabilidade neste mês.
+				</h4>
+				<progress class="estiloBarraProgresso"
+					th:max="${somaDasDespesasMensais}"
+					th:value="${somaDasDespesasMensais} - ${valorParaAlcancarDespesa}"></progress>
 			</div>
 
 
+			<div class="estiloInformacoesDeGerencia"
+				th:if="${valorLiquidoDoMes} > 0">
+				<h4>
+					Meta Mensal: R$ <span
+						th:text="${#numbers.formatDecimal(valorDaMeta, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+				</h4>
+				<progress class="estiloBarraProgresso" th:max="${valorDaMeta}"
+					th:value="${valorLiquidoDoMes}"></progress>
+			</div>
+
 		</div>
+		
+		
 
 	</section>
 
-
-
+	
 </body>
 </html>

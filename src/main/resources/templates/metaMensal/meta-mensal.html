@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Sua Meta Mensal</h1>
+			</div>
+		</div>
+	
+		<div class="container">
+
+			<div class="col-sm-4">
+
+				<div class="aw-box">
+					<div class="aw-box__icon">
+						<i class="fa  fa-usd  fa-3x"></i>
+					</div>
+					<div class="aw-box__value">
+					<a th:href="@{/editarMeta/{id} (id = ${idDaMeta)}"> R$: <span
+							th:text="${#numbers.formatDecimal(valorDaMeta, 1, 'DEFAULT', 2, 'DEFAULT')}"></span></a>					</div>
+					<div class="aw-box__title">Sua meta Mensal</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+</body>
+</html>

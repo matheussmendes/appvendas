@@ -6,8 +6,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.appvendas.model.DespesasMensais;
+import com.appvendas.model.Empreendimento;
 import com.appvendas.model.enums.CategoriaDaDespesa;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Service
 public interface DespesasMensaisServiceInterface {
 
@@ -26,4 +31,8 @@ public interface DespesasMensaisServiceInterface {
 	List<DespesasMensais> procurarDespesaMensalPorCategoria(CategoriaDaDespesa categoria);
 	
 	List<DespesasMensais> procurarDespesasMensaisPorDescricao(String descricao);
+	
+	List<DespesasMensais> listarDespesaPorEmpreendimento(Empreendimento empresa);
+	
+	Long retornarQuantidadeDeDespesaPorEmpreendimento(Empreendimento empresa);
 }

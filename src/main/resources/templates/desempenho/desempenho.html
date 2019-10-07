@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="/layout/layout">
+
+<body>
+
+	<section class="aw-layout-content  js-content"
+		layout:fragment="principal">
+
+		<div class="page-header container">
+			<div class="container-fluid">
+				<h1>Informações de Desempenho</h1>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<div class="estiloInformacoesDeGerencia"
+				th:if="${valorParaAlcancarDespesa} > 0">
+				<h4>
+					<span th:text="${nomeEmpresaLogada}"></span>, falta R$ <span
+						th:text="${#numbers.formatDecimal(valorParaAlcancarDespesa, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+					para você começar a ter rentabilidade neste mês.
+				</h4>
+				<progress class="estiloBarraProgresso"
+					th:max="${somaDasDespesasMensais}"
+					th:value="${somaDasDespesasMensais} - ${valorParaAlcancarDespesa}"></progress>
+			</div>
+
+
+			<div class="estiloInformacoesDeGerencia"
+				th:if="${valorLiquidoDoMes} > 0">
+				<h4>
+					Meta Mensal: R$ <span
+						th:text="${#numbers.formatDecimal(valorDaMeta, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+				</h4>
+				<progress class="estiloBarraProgresso" th:max="${valorDaMeta}"
+					th:value="${valorLiquidoDoMes}"></progress>
+			</div>
+
+		</div>
+
+
+	</section>
+
+</body>
+</html>

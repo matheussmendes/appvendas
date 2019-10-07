@@ -8,13 +8,22 @@ import org.springframework.stereotype.Service;
 
 import com.appvendas.dao.EmpreendimentoDaoInterface;
 import com.appvendas.model.Empreendimento;
+import com.appvendas.model.MetaDeVendaMensal;
 
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Service
 public class EmpreendimentoServiceImpl implements EmpreendimentoServiceInterface {
 
 	@Autowired
 	private EmpreendimentoDaoInterface dao;
+	
+	@Autowired
+	private UsuarioServiceImpl serviceDoUsuario;
+	
 	
 	
 	@Override
@@ -39,5 +48,10 @@ public class EmpreendimentoServiceImpl implements EmpreendimentoServiceInterface
 		return dao.findById(id);
 	}
 
+
+	
+
+
+	
 
 }

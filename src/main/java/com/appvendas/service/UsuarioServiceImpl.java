@@ -16,7 +16,11 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import com.appvendas.dao.UsuarioDaoInterface;
 import com.appvendas.model.Acesso;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @Service
 @SessionScope
 public class UsuarioServiceImpl implements UsuarioServiceInterface, UserDetailsService {
@@ -35,14 +39,23 @@ public class UsuarioServiceImpl implements UsuarioServiceInterface, UserDetailsS
 	 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	  
 	  Acesso empreendimento = encontrarAcessoPorEmail(username);
-	  System.out.println("O ID É????????" +empreendimento.getId());
 	  return new User(empreendimento.getEmail(), empreendimento.getSenha(), new HashSet<>()); 
 	  
 	}
 
 	@Override
-	public long capturarIdDaEmpresaLogada() {
+	public Long capturarIdDaEmpresaLogada() {
 		return dao.capturarIdDaEmpresaLogada(SecurityContextHolder.getContext().getAuthentication().getName());
+	}
+
+	@Override
+	public String capturarNomeDaEmpresaLogada(Long id) {
+		return dao.capturarNomeDaEmpresaLogada(id);
+	}
+
+	@Override
+	public String capturarEmailDaEmpresaLogada(Long id) {
+		return dao.capturarEmailDaEmpresaLogada(id);
 	}
 
 	

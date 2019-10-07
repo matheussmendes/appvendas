@@ -1,5 +1,9 @@
 package com.appvendas.model.enums;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 public enum TipoDoEmpreendimento {
 
 	MERCADO("Mercado"), FRUTARIA("Frutaria"), LANCHONETE("Lanchonete"), PADARIA("Padaria"), SORVETERIA("Sorveteria"),

@@ -3,6 +3,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +13,11 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.appvendas.model.enums.CategoriaDaDespesa;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 
 
 @SuppressWarnings("serial")
@@ -36,7 +42,9 @@ public class DespesasMensais extends AbstractEntity<Long> {
 	@NotNull(message = "Campo categoria é obrigatório. Favor selecionar!")
 	private CategoriaDaDespesa categoriaDaDespesa;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "id_empreendimento", referencedColumnName = "id")
+	private Empreendimento idEmpreendimento;
 	
 	public String getDescricao() {
 		return descricao;
@@ -69,5 +77,14 @@ public class DespesasMensais extends AbstractEntity<Long> {
 	public void setCategoriaDaDespesa(CategoriaDaDespesa categoriaDaDespesa) {
 		this.categoriaDaDespesa = categoriaDaDespesa;
 	}
+
+	public Empreendimento getIdEmpreendimento() {
+		return idEmpreendimento;
+	}
+
+	public void setIdEmpreendimento(Empreendimento idEmpreendimento) {
+		this.idEmpreendimento = idEmpreendimento;
+	}
+	
 	
 }

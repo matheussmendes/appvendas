@@ -1,24 +1,27 @@
 package com.appvendas.model;
 import java.time.LocalDate;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
-
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 @SuppressWarnings("serial")
 @Entity
 public class Vendas extends AbstractEntity<Long>{
 
-	@Column(columnDefinition = "DECIMAL(7,2)")
+	
+	@Column(columnDefinition = "DECIMAL(8,2)")
 	@NumberFormat(style = Style.CURRENCY, pattern = "#,#00.00")
 	private double valor;
 	
@@ -39,7 +42,7 @@ public class Vendas extends AbstractEntity<Long>{
 	@JoinColumn(name = "id_empresa", referencedColumnName = "id")
 	private Empreendimento idDoEmpreendimento;
 	
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -70,5 +73,15 @@ public class Vendas extends AbstractEntity<Long>{
 
 	public void setPendente(boolean pendente) {
 		this.pendente = pendente;
-	}	
+	}
+
+	public Empreendimento getIdDoEmpreendimento() {
+		return idDoEmpreendimento;
+	}
+
+	public void setIdDoEmpreendimento(Empreendimento idDoEmpreendimento) {
+		this.idDoEmpreendimento = idDoEmpreendimento;
+	}
+	
+	
 }

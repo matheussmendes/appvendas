@@ -8,12 +8,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.br.CNPJ;
-import com.appvendas.model.enums.TipoDoEmpreendimento;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
+import com.appvendas.model.enums.TipoDoEmpreendimento;
+/*
+ * Desenvolvedor: Matheus Mendes
+ * 
+ * suportetecnologia@outlook.com.br
+*/
 
 @SuppressWarnings("serial")
 @Entity
@@ -33,7 +38,6 @@ public class Empreendimento extends AbstractEntity<Long> {
 	@NotNull(message = "Campo Tipo do Empreendimento não pode ser nulo")
 	private TipoDoEmpreendimento tipoDoEmpreendimento;
 	
-
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "acesso_id", referencedColumnName = "id", nullable = false)
 	@NotNull
@@ -42,7 +46,9 @@ public class Empreendimento extends AbstractEntity<Long> {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "meta", referencedColumnName = "id")
 	private MetaDeVendaMensal meta;
-
+	
+	
+	
 	
 	public Acesso getAcesso() {
 		return acesso;
@@ -82,6 +88,7 @@ public class Empreendimento extends AbstractEntity<Long> {
 
 	public void setMeta(MetaDeVendaMensal meta) {
 		this.meta = meta;
-	}	
-	
+	}
+
+
 }

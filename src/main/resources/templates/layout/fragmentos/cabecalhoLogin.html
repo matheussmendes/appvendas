@@ -5,12 +5,14 @@
 
 <nav class="navbar navbar-expand-lg navbar-light">
 
-	<a class="navbar-brand" href="/painel"><h3 class="estiloDaMarca" data-toggle="tooltip" data-placement="right"
-		title="Acompanhe sua vendas diárias, mensais e anuais com praticidade">nirvana</h3>
+	<a class="navbar-brand" href="/cadastrar"> <img
+		src="/imagens/husk.png" class="estiloIconeLoginCadastrar">
 	</a>
-	
-	
-
+	<div class="container">
+		<p class="estiloMarcaCadastrar">appVendas</p>
+		<a class="nav-link" href="/sobre" style="color:white">Sobre nós</a>
+		<a class="nav-link" href="/contato" style="color:white">Contato</a>
+	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
 		aria-expanded="false" aria-label="Alterna navegação">
@@ -24,15 +26,7 @@
 			<li><a class="nav-link" href="/painel"> </a></li>
 
 		</ul>
-		<a class="nav-link" href="/lista"><img src="imagens/power10.png"
-			class="estiloIconeMenu" alt="Sair" data-toggle="tooltip" data-placement="left"
-		title="Sair"/></a>
 
-		<form class="form-inline my-2 my-lg-0" th:action="@{/buscar}">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Faça aqui sua busca" th:name="descricao">
-			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Procurar</button>
-		</form>
 
 	</div>
 
