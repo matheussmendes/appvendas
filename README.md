@@ -1,6 +1,13 @@
 # appvendas
 Sistema Web em Java com Spring para gestão de rentabilidade para donos de pequenos negócios ou prestadores de serviços
 
+![home](https://user-images.githubusercontent.com/49170051/66351833-bc67c800-e934-11e9-8923-acca3fe778fc.jpg)
+
+![2 pronto](https://user-images.githubusercontent.com/49170051/66351831-bc67c800-e934-11e9-857b-94fa188995ab.jpg)
+
+![3 pronto](https://user-images.githubusercontent.com/49170051/66351832-bc67c800-e934-11e9-9013-6b6f7a1308e9.jpg)
+
+
 <h3>Sobre</h3>
 
 Sabendo da dificuldade de possuir o controle sobre as entradas e
